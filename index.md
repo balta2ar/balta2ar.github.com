@@ -18,13 +18,13 @@ Study
 * [Machine Learning, Statement of Accomplishment, December 2011][cert-ml-dec-2011]
 * [Articifial Intelligence, Statement of Accomplishment, December 2011][cert-ai-dec-2011]
 * [Programming a Robotic Car, Statement of Accomplishment, April 2012][cert-robotics-car-april-2012]
-* [Algorithms: Design and Analysis, Part I, Statement of Accomplishment, April 2012][cert-algo-aprit-2012]
+* [Algorithms: Design and Analysis, Part I, Statement of Accomplishment, April 2012][cert-algo-april-2012]
 
 Contacts
 --------
 
 * E-mail: baltazar dot bz at gmail dot com
-* Twitter: [twitter][https://twitter.com/baltazar_bz]
+* Twitter: [https://twitter.com/baltazar_bz][twitter]
 
 [resume-en]: https://docs.google.com/document/d/1zocYObOLFxoyjlG09GX0NJg0h69sFTjHH3d78-aiK-8/edit
 [resume-ru]: https://docs.google.com/document/d/1u_XKVHYTTn3Q0GISEEswEpiNvecIj0AB7CeufIyaw-M/edit
