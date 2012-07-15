@@ -1,3 +1,7 @@
+---
+layout: post
+title: About
+---
 Yuri Bochkarev
 ==============
 
