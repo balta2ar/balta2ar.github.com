@@ -21,8 +21,8 @@ body
 {
   background-color: white;
   /*font: 13.34px helvetica, arial, clean, sans-serif;*/
-  *font-size: small;
-  text-align: left;
+  /* *font-size: large; */
+  /* text-align: left; */
   font-family: "Nimbus Sans L", sans-serif;
   background: white;
   margin: 2em 1em 2em 1em;
@@ -31,6 +31,13 @@ body
 h1, h2, h3, h4
 {
     color: #005aa0;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 1em auto 1em auto;
 }
 
 /*
