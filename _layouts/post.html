@@ -1,9 +1,21 @@
 ---
 layout: default
 ---
-<div id="post">
-    {{ content }}
+<div id='socbuttons'>
+<script type="text/javascript"><!--
+document.write(VK.Share.button(false,{type: "custom", text: "<img src=\"http://vk.com/images/vk32.png?1\" />"}));
+--></script>
 </div>
+<article>
+    <nav>
+        <a href=#><span class='navbut'>Свежее</span></a>
+        <a href=#><span class='navbut'>Архив</span></a>
+        <a href=#><span class='navbut'>О блоге</span></a>
+    </nav>
+
+    {{ content }}
+</article>
+
 
 <div id="related">
   <h2>All Posts</h2>
@@ -13,7 +25,7 @@ layout: default
     {% endfor %}
   </ul>
 </div>
-
+<footer>&copy; Юрий Бочкарев, 2012</footer>
 <!--
 <div id="related">
   <h2>Related Posts</h2>
