@@ -243,10 +243,8 @@ footer {
 }
 
 #activity, #study, #contacts, #hobbies {
-    background: #FCFCFC;
     color: #2E333D;
     border-radius: 0 0 20px 20px;
-    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
     padding: 10px 0 0 10px;
 }
 
@@ -255,26 +253,26 @@ footer {
 }
 
 .infoheaderleft {
-    background-color: #2E333D;
+   /* background-color: #2E333D;*/
+    border-bottom: 2px solid #2E333D;
     display: inline-block;
     width: 25%;
     margin-left: 22%;
     border-radius: 20px 20px 0 0;
     height: 1.8em;
     padding: 5px 0 0 10px;
-    color: #FCFCFC;
-    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
+    /*color: #FCFCFC;*/
 }
 
 .infoheaderright {
-    background-color: #2E333D;
+   /* background-color: #2E333D;*/
+    border-bottom: 2px solid #2E333D;
     display: inline;
     width: 25%;
     margin-right: 22%;
     border-radius: 20px 20px 0 0;
     height: 1.8em;
     padding: 5px 0 0 10px;
-    color: #FCFCFC;
-    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
+   /* color: #FCFCFC;*/
     float: right;
 }
