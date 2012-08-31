@@ -1,30 +1,29 @@
 ---
 layout: default
 ---
-<div id='socbuttons'>
-<script type="text/javascript"><!--
-document.write(VK.Share.button(false,{type: "custom", text: "<img src=\"http://vk.com/images/vk32.png?1\" />"}));
---></script>
-</div>
-<article>
+<div id='wrapper'>
     <nav>
-        <a href=#><span class='navbut'>Свежее</span></a>
-        <a href=#><span class='navbut'>Архив</span></a>
-        <a href=#><span class='navbut'>О блоге</span></a>
+    <a id='logoimage' href='/'></a><a id='logo' href='/'>Ira's production</a>
+        <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>О блоге</span></a>
+        <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Архив</span></a>
+        <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Свежее</span></a>
     </nav>
-
-    {{ content }}
-</article>
-
+<article>
+    <div id='post'>{{ content }}</div>
 
 <div id="related">
   <h2>All Posts</h2>
-  <ul class="posts">
+  <ol class="posts">
     {% for post in site.posts limit:3 %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    <li><p><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></p></li>
     {% endfor %}
-  </ul>
+  </ol>
 </div>
+</article>
+
+<div class="footer-push"></div>
+</div>
+
 <footer>&copy; Юрий Бочкарев, 2012</footer>
 <!--
 <div id="related">
