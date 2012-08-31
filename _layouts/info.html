@@ -8,22 +8,12 @@ layout: default
         <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Архив</span></a>
         <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Свежее</span></a>
     </nav>
-<article>
-    <div id='post'>{{ content }}</div>
-
-<div id="related">
-  <h2>All Posts</h2>
-  <ol class="posts">
-    {% for post in site.posts limit:3 %}
-    <li><p><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></p></li>
-    {% endfor %}
-  </ol>
+<div id='info'>
+        {{ content }}
 </div>
-</article>
 
 <div class="footer-push"></div>
 </div>
-
 <footer>&copy; Юрий Бочкарев, 2012</footer>
 <!--
 <div id="related">

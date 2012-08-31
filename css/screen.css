@@ -34,7 +34,7 @@ body {
 article {
     height: 100%;
     min-height: 100%;
-    background: #FCFCFC;/*#F8F8F8;*/
+    background: #FCFCFC;
     margin: 0 10%;
     padding: 0 5% 15px;
     text-align: justify;
@@ -75,9 +75,7 @@ nav {
     width: 100%;
     height: 80px;
     background: #2E333D;
-   /* border-radius: 0 0 20px 20px;*/
-   /* border: 2px solid #767A76;*/
-
+    border-bottom: 4px solid #4D5566;
 }
  
 .navbut {
@@ -228,4 +226,55 @@ footer {
     border-top: 4px dashed #2E333D;
     margin-top: 30px;
 }
+
+#activity, #study {
+    width: 25%;
+    height: 7em;
+    margin-left: 22%;
+    display: inline-block;
+}
+
+#contacts, #hobbies {
+    width: 25%;
+    height: 7em;
+    margin-right: 22%;
+    float: right;
+    display: inline;
+}
+
+#activity, #study, #contacts, #hobbies {
+    background: #FCFCFC;
+    color: #2E333D;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
+    padding: 10px 0 0 10px;
+}
+
+#info {
+    margin: 10% auto;
+}
+
+.infoheaderleft {
+    background-color: #2E333D;
+    display: inline-block;
+    width: 25%;
+    margin-left: 22%;
+    border-radius: 20px 20px 0 0;
+    height: 1.8em;
+    padding: 5px 0 0 10px;
+    color: #FCFCFC;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
+}
+
+.infoheaderright {
+    background-color: #2E333D;
+    display: inline;
+    width: 25%;
+    margin-right: 22%;
+    border-radius: 20px 20px 0 0;
+    height: 1.8em;
+    padding: 5px 0 0 10px;
+    color: #FCFCFC;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
+    float: right;
 }
