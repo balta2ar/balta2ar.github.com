@@ -39,10 +39,17 @@ article {
     padding: 0 5% 15px;
     text-align: justify;
     color: #2E333D;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    position: static;
 }
 
 #post {
     padding-bottom: 15px;
+}
+
+#post > p {
+     text-indent: 2em;
 }
 
 h1 {
@@ -75,7 +82,7 @@ nav {
     width: 100%;
     height: 80px;
     background: #2E333D;
-    border-bottom: 4px solid #4D5566;
+    border-bottom: 4px solid #687999;/*#4D5566;*/
 }
  
 .navbut {
@@ -121,7 +128,7 @@ a {
     color: #333333;
 } 
  
-img {
+#post img {
     display: block;
     margin: 20px auto;
     box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
@@ -222,19 +229,19 @@ footer {
   }
 */
 #related {
-    padding: 20px 0 15px 0;
-    border-top: 4px dashed #2E333D;
-    margin-top: 30px;
+    padding: 10px 3% 15px;
+    border-top: 3px dashed #2E333D;
+    margin: 20px 0 20px;
 }
 
-#activity, #study {
+#activities, #studies {
     width: 25%;
     height: 7em;
     margin-left: 22%;
     display: inline-block;
 }
 
-#contacts, #hobbies {
+#contact, #hobbies {
     width: 25%;
     height: 7em;
     margin-right: 22%;
@@ -242,37 +249,67 @@ footer {
     display: inline;
 }
 
-#activity, #study, #contacts, #hobbies {
+#activities, #studies, #contact, #hobbies {
     color: #2E333D;
-    border-radius: 0 0 20px 20px;
     padding: 10px 0 0 10px;
 }
 
-#info {
-    margin: 8% 10% 8% 10%;
+#about-container {
+    width: 100%;
+    vertical-align:middle;
+/*    margin: 5% 10% 10% 10%;*/
+}
+
+.infoheaderright, .infoheaderleft {
+    width: 25%;
+    height: 1.8em;
+    padding: 5px 0 0 10px;
 }
 
 .infoheaderleft {
-   /* background-color: #2E333D;*/
-    border-bottom: 2px solid #2E333D;
     display: inline-block;
-    width: 25%;
     margin-left: 22%;
-    border-radius: 20px 20px 0 0;
-    height: 1.8em;
-    padding: 5px 0 0 10px;
-    /*color: #FCFCFC;*/
 }
 
 .infoheaderright {
-   /* background-color: #2E333D;*/
-    border-bottom: 2px solid #2E333D;
     display: inline;
-    width: 25%;
     margin-right: 22%;
-    border-radius: 20px 20px 0 0;
-    height: 1.8em;
-    padding: 5px 0 0 10px;
-   /* color: #FCFCFC;*/
     float: right;
+}
+
+.infoheaderright:after, .infoheaderleft:after {
+    content:""; 
+    height:1px;
+    background:-o-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
+    background:-moz-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
+    background:-webkit-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
+    background:linear-gradient(left, #000000 0%, #000000 50%, transparent 100%);
+    width:100%;
+    display: block;
+}
+
+.active {
+    border-bottom: 1px solid #FCFCFC;
+}
+
+aside {
+    background: url('/images/cat_trace.png') repeat-y;
+    width: 80px;
+    float: left;
+}
+
+#activities img, #studies img, #contact img, #hobbies img {
+    /*box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);*/
+    /*border-radius: 10px;*/
+    margin: 5px;
+    border-bottom: solid 1px transparent;
+/*    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);*/
+}
+
+#activities img:hover, #studies img:hover, #contact img:hover, #hobbies img:hover {
+    border-bottom: 1px dashed #2E333D;
 }

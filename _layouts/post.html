@@ -2,24 +2,19 @@
 layout: default
 ---
 <div id='wrapper'>
-    <nav>
-    <a id='logoimage' href='/'></a><a id='logo' href='/'>Ira's production</a>
-        <a href='/2012/08/31/o-bloge.html'><span class='navbut'>О блоге</span></a>
-        <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Архив</span></a>
-        <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Свежее</span></a>
-    </nav>
-<article>
-    <div id='post'>{{ content }}</div>
-
-<div id="related">
-  <h2>All Posts</h2>
-  <ol class="posts">
-    {% for post in site.posts limit:3 %}
-    <li><p><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></p></li>
-    {% endfor %}
-  </ol>
-</div>
-</article>
+    {% include navbar.md %}
+    <aside></aside>
+    <article>
+        <div id='post'>{{ content }}</div>
+        <div id="related">
+        <h2>All Posts</h2>
+        <ol class="posts">
+            {% for post in site.posts limit:3 %}
+            <li><p><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></p></li>
+            {% endfor %}
+        </ol>
+        </div>
+    </article>
 
 <div class="footer-push"></div>
 </div>

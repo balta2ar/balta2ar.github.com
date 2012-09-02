@@ -2,16 +2,12 @@
 layout: default
 ---
 <div id='wrapper'>
-    <nav>
-    <a id='logoimage' href='/'></a><a id='logo' href='/'>Ira's production</a>
-        <a href='/2012/08/31/o-bloge.html'><span class='navbut'>О блоге</span></a>
-        <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Архив</span></a>
-        <a href='/2009/07/30/introducting-the-yubr-programming-language.html'><span class='navbut'>Свежее</span></a>
-    </nav>
-<div id='info'>
-        {{ content }}
-</div>
-
+    {% assign page_about_active = 'active' %}
+    {% include navbar.md %}
+    <table width='100%'> <!--style='position:absolute; bottom:20px;'>--><tr>
+    <td id='about-container'>
+            {{ content }}
+    </td></tr></table>
 <div class="footer-push"></div>
 </div>
 <footer>&copy; Юрий Бочкарев, 2012</footer>
