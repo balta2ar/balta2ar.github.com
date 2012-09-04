@@ -16,8 +16,6 @@
 
 html {
     height: 100%;
-   /* min-height: 100%;
-    height: auto !important;*/
 }
 
 *::selection {
@@ -30,6 +28,10 @@ body {
     background: #F8F8F8;
 }
 
+#hideoverflow {
+    overflow: hidden;
+}
+
 
 article {
     height: 100%;
@@ -40,6 +42,11 @@ article {
     color: #2E333D;
     border-left: 1px solid #BBBBBB;
     border-right: 1px solid #BBBBBB;
+}
+
+#article {
+    padding-bottom: 32767px;
+    margin-bottom: -32767px;
 }
 
 #post {
@@ -57,12 +64,12 @@ article {
 }
 
 
-span article {
+/*span article {
     padding-bottom:5000px;
     margin: 0 0 -5000px 0;
     overflow: hidden;
     position: relative;
-}
+}*/
 
 h1 {
     font-size: 1.75em;
@@ -177,6 +184,10 @@ ol p{
     color: #2E333D;
 }
 
+ol.posts {
+    padding-bottom: 20px;
+}
+
 footer {
     padding: 10px;
     background-color: #2E333D;
@@ -194,15 +205,13 @@ footer {
     height: 100%;
     height: auto !important;
     min-height: 100%;
-    margin: 0 auto -20px;/*0 -40px 0;*/
-    overflow:hidden;
-    padding-bottom: 20px;
+    margin: 0 auto -40px;*//*0 -40px 0;*/
+    overflow: hidden;
+    position: relative;
 }
 
 .footer-push {
     height: 20px;
-    margin: 0;
-    padding: 0;
 }
 /*****************************************************************************/
 /*
@@ -315,7 +324,6 @@ aside {
     float: left;
     padding-bottom:15000px;
     margin: 0 0 -15000px 20px;
-    overflow:hidden;
     position: relative; /* for z-index to work */
     z-index: -20;
 }

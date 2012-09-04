@@ -1,16 +1,14 @@
 ---
-layout: default
+layout: default_columned
 ---
-<div id='wrapper'>
+<section id='wrapper'>
     {% include header.md %}
-    <span>
-    <article>
-        <div id='aboutblog'>
-            {{ content }}
-        </div>
+        <article id='article'>
+            <div id='aboutblog'>
+                {{ content }}
+            </div>
         </article>
-        </span>
-    <div class="footer-push">
-    </div>
+    <div class="footer-push"></div>
+</section>
 {% include footer.md %}
-</div>
+
