@@ -2,6 +2,7 @@
 layout: page
 title: Архив
 group: 'navigation'
+order: 1
 ---
 <h2>All Posts</h2>
 <ol class="posts">

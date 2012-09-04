@@ -2,6 +2,7 @@
 layout: columned_page
 title: О блоге
 group: 'navigation'
+order: 2
 ---
 <!-- {% assign active_page = 'about_blog' %} -->
 В этом блоге я оставляю свои заметки о програмировании. По большей части это вещи,

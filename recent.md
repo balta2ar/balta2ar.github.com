@@ -2,6 +2,7 @@
 layout: page
 title: Свежатинка
 group: 'navigation'
+order: 0
 ---
 <h2>Recent Posts</h2>
 <ol class="posts">
