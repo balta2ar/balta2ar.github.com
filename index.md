@@ -1,5 +1,5 @@
 ---
-layout: post
-title: About
+layout: page
+title: All Abouts
 ---
 {% include index.md %}

@@ -1,7 +1,8 @@
 ---
-layout: info
-title: О блоге
+layout: page
+title: Об авторе
 ---
+{% assign active_page = 'about_author' %}
 Деятельность
 {: .infoheaderleft}
 

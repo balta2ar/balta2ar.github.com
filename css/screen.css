@@ -16,6 +16,8 @@
 
 html {
     height: 100%;
+   /* min-height: 100%;
+    height: auto !important;*/
 }
 
 *::selection {
@@ -24,16 +26,13 @@ html {
 }
 
 body {
-    margin: 0;
     height: 100%;
-    min-height: 100%;
     background: #F8F8F8;
 }
 
 
 article {
     height: 100%;
-    min-height: 100%;
     background: #FCFCFC;
     margin: 0 10%;
     padding: 0 5% 15px;
@@ -41,7 +40,6 @@ article {
     color: #2E333D;
     border-left: 1px solid #BBBBBB;
     border-right: 1px solid #BBBBBB;
-    position: static;
 }
 
 #post {
@@ -50,6 +48,20 @@ article {
 
 #post > p {
      text-indent: 2em;
+}
+
+#aboutblog {
+    padding-bottom: 15px;
+    padding-top: 20px;
+    text-indent: 2em;
+}
+
+
+span article {
+    padding-bottom:5000px;
+    margin: 0 0 -5000px 0;
+    overflow: hidden;
+    position: relative;
 }
 
 h1 {
@@ -78,11 +90,11 @@ ul, h1, h2, p {
     margin-bottom: 30px;
 }
 
-nav {
+header {
     width: 100%;
     height: 80px;
     background: #2E333D;
-    border-bottom: 4px solid #687999;/*#4D5566;*/
+    border-bottom: 4px solid #687999;
 }
  
 .navbut {
@@ -113,11 +125,11 @@ nav {
 }
 
 #logoimage {
-    background-image: url('/images/Lambda.png');
+    background-image: url('/images/lambda.png');
 }
 
 #logoimage:hover {
-    background-image: url('/images/Lambdashine.png');
+    background-image: url('/images/lambdashine.png');
 }
 
 .navbut:hover {
@@ -172,14 +184,19 @@ footer {
     color: #E6E0E3;
     font-size: 0.875em;
     height: 20px;
+    position: relative;
+    z-index: 10;
+    clear: both;
+    margin-top: -20px;
 }
 
 #wrapper {
-    min-height: 100%;
-    height: auto !important;
     height: 100%;
-    margin: 0 0 -40px 0; 
-    padding: 0;    
+    height: auto !important;
+    min-height: 100%;
+    margin: 0 auto -20px;/*0 -40px 0;*/
+    overflow:hidden;
+    padding-bottom: 20px;
 }
 
 .footer-push {
@@ -278,13 +295,13 @@ footer {
 }
 
 .infoheaderright:after, .infoheaderleft:after {
-    content:""; 
-    height:1px;
-    background:-o-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
-    background:-moz-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
-    background:-webkit-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
-    background:linear-gradient(left, #000000 0%, #000000 50%, transparent 100%);
-    width:100%;
+    content: ""; 
+    height: 1px;
+    background: -o-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
+    background: -moz-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
+    background: -webkit-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
+    background: linear-gradient(left, #000000 0%, #000000 50%, transparent 100%);
+    width: 100%;
     display: block;
 }
 
@@ -294,20 +311,46 @@ footer {
 
 aside {
     background: url('/images/cat_trace.png') repeat-y;
-    width: 80px;
+    width: 50px;
     float: left;
+    padding-bottom:15000px;
+    margin: 0 0 -15000px 20px;
+    overflow:hidden;
+    position: relative; /* for z-index to work */
+    z-index: -20;
 }
 
+#cat {
+    position:relative;
+    clear:none;
+    float:left;
+    bottom:20px;
+    left: 20px;
+    width: 100px;
+    height: 45px;
+    overflow: hidden;
+    background: url('/images/cat2.png');
+    z-index: 0;
+    transition: all 2s;
+    -webkit-transition: all 2s;
+    -moz-transition: all 2s;
+    -o-transition: all 2s;
+    -ms-transition: all 2s;
+}
+
+#cat:hover {
+    transform: translateY(-98px);
+    -webkit-transform:translateY(-98px);
+    -moz-transform:translateY(-80px);
+    -ms-transform:translateY(-80px);
+    -o-transform:translateY(-80px);
+    height: 118px;
+}
+
+
 #activities img, #studies img, #contact img, #hobbies img {
-    /*box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);*/
-    /*border-radius: 10px;*/
     margin: 5px;
     border-bottom: solid 1px transparent;
-/*    -moz-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);*/
 }
 
 #activities img:hover, #studies img:hover, #contact img:hover, #hobbies img:hover {
