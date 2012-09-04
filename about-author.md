@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Об авторе
+group: 'navigation'
 ---
 {% assign active_page = 'about_author' %}
 Деятельность
