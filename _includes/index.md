@@ -1,3 +1,5 @@
+<!--
+
 Yuri Bochkarev
 ==============
 
@@ -38,3 +40,5 @@ Contacts
 [cert-algo-april-2012]: https://docs.google.com/document/d/1j6LlyJUGM03TxqSImyHeHoa16dSCLZQop6zmrPe8YOw/edit
 
 [twitter]: https://twitter.com/baltazar_bz
+
+-->

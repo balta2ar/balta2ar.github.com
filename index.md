@@ -1,5 +1,8 @@
 ---
-layout: page
+layout: columned_page
 title: All Abouts
 ---
-{% include index.md %}
+
+{% assign preview_count = 2 %}
+{% include preview.md %}
+
