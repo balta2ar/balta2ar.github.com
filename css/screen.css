@@ -168,6 +168,7 @@ a:hover {
 
 a:visited {
     color: #999999;
+    text-decoration: none;
 }
 
 ol li {
@@ -205,7 +206,7 @@ footer {
     height: 100%;
     height: auto !important;
     min-height: 100%;
-    margin: 0 auto -40px;*//*0 -40px 0;*/
+    margin: 0 auto -40px;/*0 -40px 0;*/
     overflow: hidden;
     position: relative;
 }
@@ -261,49 +262,61 @@ footer {
 }
 
 #activities, #studies {
-    width: 25%;
-    height: 7em;
-    margin-left: 22%;
+/*    margin-left: 22%;*/
     display: inline-block;
+    float:right;
+    text-align: right;
+    margin-right: 1em;
 }
 
 #contact, #hobbies {
-    width: 25%;
-    height: 7em;
-    margin-right: 22%;
-    float: right;
+ /*   margin-right: 22%;*/
+    float: left;
     display: inline;
+    margin-left: 1em;
+    clear: both;
 }
 
 #activities, #studies, #contact, #hobbies {
     color: #2E333D;
     padding: 10px 0 0 10px;
+    width: 50%;
+    height: 7em;
+    clear: both;
 }
 
-#about-container {
+/*#about-container {
     width: 100%;
     vertical-align:middle;
-/*    margin: 5% 10% 10% 10%;*/
-}
+    margin: 4% auto;
+}*/
 
 .infoheaderright, .infoheaderleft {
-    width: 25%;
+    width: 50%;
     height: 1.8em;
     padding: 5px 0 0 10px;
+    clear: both;
+    margin-top: 8%;
 }
 
 .infoheaderleft {
     display: inline-block;
-    margin-left: 22%;
+/*    float: left;
+    margin-left: 22%;*/
+    float:right;
+    text-align: right;
+    margin-right: 1em;
 }
 
 .infoheaderright {
     display: inline;
-    margin-right: 22%;
-    float: right;
+/*    margin-right: 22%;
+    float: right;*/
+    float:left;
+    margin-left: 1em;
 }
 
-.infoheaderright:after, .infoheaderleft:after {
+.infoheaderright:after {
     content: ""; 
     height: 1px;
     background: -o-linear-gradient(left, #000000 0%, #000000 50%, transparent 100%); 
@@ -313,6 +326,18 @@ footer {
     width: 100%;
     display: block;
 }
+
+.infoheaderleft:after {
+    content: ""; 
+    height: 1px;
+    background: -o-linear-gradient(right, #000000 0%, #000000 50%, transparent 100%); 
+    background: -moz-linear-gradient(right, #000000 0%, #000000 50%, transparent 100%); 
+    background: -webkit-linear-gradient(right, #000000 0%, #000000 50%, transparent 100%); 
+    background: linear-gradient(right, #000000 0%, #000000 50%, transparent 100%);
+    width: 100%;
+    display: block;
+}
+
 
 .active {
     border-bottom: 1px solid #FCFCFC;
@@ -332,11 +357,10 @@ aside {
     position:relative;
     clear:none;
     float:left;
-    bottom:20px;
-    left: 20px;
+    bottom:0;
+    left: 5px;
     width: 100px;
     height: 45px;
-    overflow: hidden;
     background: url('/images/cat2.png');
     z-index: 0;
     transition: all 2s;
@@ -344,6 +368,7 @@ aside {
     -moz-transition: all 2s;
     -o-transition: all 2s;
     -ms-transition: all 2s;
+    display: inline;
 }
 
 #cat:hover {
@@ -352,9 +377,9 @@ aside {
     -moz-transform:translateY(-80px);
     -ms-transform:translateY(-80px);
     -o-transform:translateY(-80px);
-    height: 118px;
+    height: 112px;
+    clear: none;
 }
-
 
 #activities img, #studies img, #contact img, #hobbies img {
     margin: 5px;

@@ -4,7 +4,7 @@ layout: default
 
 <div id='wrapper'>
     {% include header.md %}
-    <!--    <aside></aside>-->
+    <aside></aside>
 
     <article>
         <div id='post'>{{ content }}</div>
@@ -16,9 +16,10 @@ layout: default
             {% endfor %}
         </ol>
         </div>
-    </article>
+        </article>
+
+        <div id='cat'></div>
+
+    <div class="footer-push"></div>
     </div>
-    <div class="footer-push">
-    </div>
-    <!--   <div id='cat'></div>-->
 {% include footer.md %}
