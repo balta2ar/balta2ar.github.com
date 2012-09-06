@@ -101,9 +101,23 @@ header {
     width: 100%;
     height: 80px;
     background: #2E333D;
-    border-bottom: 4px solid #687999;
 }
- 
+
+header:after {
+    content: ""; 
+    height: 5px;
+    background: -webkit-linear-gradient(top, #687999 0%,#2E333d); 
+    background: -o-linear-gradient(top, #687999 0%,#2E333d); 
+    background: -moz-linear-gradient(top, #687999 0%,#2E333d); 
+    background: -ms-linear-gradient(top, #687999 0%,#2E333d); 
+    background: linear-gradient(top, #687999 0%,#2E333d); 
+    width: 100%;
+    display: block;
+    position: relative;
+    left:0;
+    top:80px;
+}
+
 .navbut {
     padding: 0 0 10px 0;
     margin: 30px 50px 0 0;
@@ -189,6 +203,20 @@ ol.posts {
     padding-bottom: 20px;
 }
 
+li.preview {
+    border: 2px dashed #687999;
+    border-bottom: none;  
+    border-radius: 10px 10px 0 0;
+    padding: 5px;
+}
+
+li.preview + p {
+    border: 2px dashed #687999;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 5px;
+}
+
 footer {
     padding: 10px;
     background-color: #2E333D;
@@ -214,13 +242,7 @@ footer {
 .footer-push {
     height: 20px;
 }
-/*****************************************************************************/
-/*
-/* Posts
-/*
-/*****************************************************************************/
 
-  /* standard */
 /*
   #post pre {
     border: 1px solid #ddd;
@@ -285,12 +307,6 @@ footer {
     clear: both;
 }
 
-/*#about-container {
-    width: 100%;
-    vertical-align:middle;
-    margin: 4% auto;
-}*/
-
 .infoheaderright, .infoheaderleft {
     width: 50%;
     height: 1.8em;
@@ -301,8 +317,6 @@ footer {
 
 .infoheaderleft {
     display: inline-block;
-/*    float: left;
-    margin-left: 22%;*/
     float:right;
     text-align: right;
     margin-right: 1em;
@@ -310,8 +324,6 @@ footer {
 
 .infoheaderright {
     display: inline;
-/*    margin-right: 22%;
-    float: right;*/
     float:left;
     margin-left: 1em;
 }
@@ -347,21 +359,21 @@ aside {
     background: url('/images/cat_trace.png') repeat-y;
     width: 50px;
     float: left;
-    padding-bottom:15000px;
-    margin: 0 0 -15000px 20px;
+    padding-bottom:10000em;
+    margin: 0 0 -10000em 20px;
     position: relative; /* for z-index to work */
     z-index: -20;
 }
 
 #cat {
-    position:relative;
+    position: absolute;
     clear:none;
     float:left;
     bottom:0;
     left: 5px;
     width: 100px;
     height: 45px;
-    background: url('/images/cat2.png');
+    background: url('/images/cat2.png') no-repeat;
     z-index: 0;
     transition: all 2s;
     -webkit-transition: all 2s;
@@ -372,13 +384,20 @@ aside {
 }
 
 #cat:hover {
-    transform: translateY(-98px);
-    -webkit-transform:translateY(-98px);
-    -moz-transform:translateY(-80px);
-    -ms-transform:translateY(-80px);
-    -o-transform:translateY(-80px);
+    transform: translateY(-40px);
+    -webkit-transform:translateY(-40px);
+    -moz-transform:translateY(-40px);
+    -ms-transform:translateY(-40px);
+    -o-transform:translateY(-40px);
     height: 112px;
     clear: none;
+}
+
+#chi {
+    text-align:right;
+    position: absolute;
+    bottom: 15%;
+    right: 20%;
 }
 
 #activities img, #studies img, #contact img, #hobbies img {
@@ -388,4 +407,8 @@ aside {
 
 #activities img:hover, #studies img:hover, #contact img:hover, #hobbies img:hover {
     border-bottom: 1px dashed #2E333D;
+}
+
+#content-wrap {
+    margin: 0 2em;
 }

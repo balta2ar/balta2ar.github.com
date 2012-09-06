@@ -11,3 +11,6 @@ order: 2
 Блог использует Jekyll + kramdown.
 
 Вёрстка и дизайн созданы совместно с seakeyrose.
+
+![Cat typing](/images/chi.png "Cat typing")
+{: #chi}

@@ -4,6 +4,7 @@ title: Свежатинка
 group: 'navigation'
 order: 0
 ---
+<div id='content-wrap'>
 <h2>Свежее</h2>
 <ol class="posts">
     {% for post in site.posts limit:3 %}
@@ -13,3 +14,4 @@ order: 0
 
 {% assign preview_count = 2 %}
 {% include preview.md %}
+</div>
