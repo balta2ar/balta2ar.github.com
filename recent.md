@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Свежатинка
+title: Свежее
 group: 'navigation'
 order: 0
 ---

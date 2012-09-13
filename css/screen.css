@@ -118,6 +118,21 @@ header:after {
     top:80px;
 }
 
+footer:before {
+    content: ""; 
+    height: 5px;
+    background: -webkit-linear-gradient(top, #687999 0%,#2E333d); 
+    background: -o-linear-gradient(top, #687999 0%,#2E333d); 
+    background: -moz-linear-gradient(top, #687999 0%,#2E333d); 
+    background: -ms-linear-gradient(top, #687999 0%,#2E333d); 
+    background: linear-gradient(top, #687999 0%,#2E333d); 
+    width: 100%;
+    display: block;
+    position: relative;
+    top: -10px;
+    padding: 0;
+}
+
 .navbut {
     padding: 0 0 10px 0;
     margin: 30px 50px 0 0;
@@ -164,16 +179,11 @@ a {
 #post img {
     display: block;
     margin: 20px auto;
-    box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
 }
 
 .stick img, p.stick {
-    display: inline;
+    display: inline  !important;
     margin: 20px 0 20px 4px;
-}
-
-.artimage img {
-    border-radius: 15px;
 }
 
 a:hover {
@@ -218,7 +228,6 @@ li.preview + p {
 }
 
 footer {
-    padding: 10px;
     background-color: #2E333D;
     text-align: center;
     color: #E6E0E3;
@@ -228,6 +237,7 @@ footer {
     z-index: 10;
     clear: both;
     margin-top: -20px;
+    padding: 10px 0;
 }
 
 #wrapper {
@@ -353,44 +363,6 @@ footer {
 
 .active {
     border-bottom: 1px solid #FCFCFC;
-}
-
-aside {
-    background: url('/images/cat_trace.png') repeat-y;
-    width: 50px;
-    float: left;
-    padding-bottom:10000em;
-    margin: 0 0 -10000em 20px;
-    position: relative; /* for z-index to work */
-    z-index: -20;
-}
-
-#cat {
-    position: absolute;
-    clear:none;
-    float:left;
-    bottom:0;
-    left: 5px;
-    width: 100px;
-    height: 45px;
-    background: url('/images/cat2.png') no-repeat;
-    z-index: 0;
-    transition: all 2s;
-    -webkit-transition: all 2s;
-    -moz-transition: all 2s;
-    -o-transition: all 2s;
-    -ms-transition: all 2s;
-    display: inline;
-}
-
-#cat:hover {
-    transform: translateY(-40px);
-    -webkit-transform:translateY(-40px);
-    -moz-transform:translateY(-40px);
-    -ms-transform:translateY(-40px);
-    -o-transform:translateY(-40px);
-    height: 112px;
-    clear: none;
 }
 
 #chi {
