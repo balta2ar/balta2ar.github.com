@@ -13,8 +13,12 @@
     font-size: 18px;
 }
 
-html {
+html, body {
     height: 100%;
+}
+
+body {
+    background: #F8F8F8;
 }
 
 pre {
