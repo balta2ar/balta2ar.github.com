@@ -118,6 +118,7 @@ h1 {
 h2 {
     margin: 20px 0;
     font-size: 1.25em;
+    color: #2E333D;
 }
 
 h3 {
@@ -136,30 +137,6 @@ header {
     width: 100%;
     height: 80px;
     background: #2E333D;
-}
-
-header:after, footer:before {
-    content: ""; 
-    height: 5px;
-    background: -webkit-linear-gradient(top, #687999 0%,#2E333d); 
-    background: -o-linear-gradient(top, #687999 0%,#2E333d); 
-    background: -moz-linear-gradient(top, #687999 0%,#2E333d); 
-    background: -ms-linear-gradient(top, #687999 0%,#2E333d); 
-    background: linear-gradient(top, #687999 0%,#2E333d); 
-    width: 100%;
-    display: block;
-    position: relative;
-    left:0;
-    top:80px;
-}
-
-footer:before {
-    background: -webkit-linear-gradient(bottom, #687999 0%,#2E333d); 
-    background: -o-linear-gradient(bottom, #687999 0%,#2E333d); 
-    background: -moz-linear-gradient(bottom, #687999 0%,#2E333d); 
-    background: -ms-linear-gradient(bottom, #687999 0%,#2E333d); 
-    background: linear-gradient(bottom, #687999 0%,#2E333d); 
-    top: -10px;
 }
 
 .navbut {
@@ -251,16 +228,12 @@ ol.posts {
 }
 
 li.preview {
-    border: 2px dashed #687999;
-    border-bottom: none;  
-    border-radius: 10px 10px 0 0;
+    /*border: 2px solid #687999;*/
+    border-bottom: 2px dashed #687999;  
     padding: 5px;
 }
 
 li.preview + p {
-    border: 2px dashed #687999;
-    border-top: none;
-    border-radius: 0 0 10px 10px;
     padding: 5px;
 }
 
@@ -419,5 +392,5 @@ footer {
 }
 
 #content-wrap {
-    margin: 0 2em;
+    margin: 0 4%;
 }

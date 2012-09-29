@@ -40,13 +40,13 @@ order: 3
 Интересы
 {: .infoheaderright}
 
-![Курочка](/images/chicken.png "Курочка")
-![Коровка](/images/cow.png "Коровка")
-![Свинюшенька](/images/pig.png "Свинюшенька")
-![ArchLinux](/images/archlinux.png "ArchLinux")
-![Haskell](/images/haskell.png "Haskell")
-![Бодибилдинг](/images/bodybuilding.png "Бодибилдинг")
-![Фортепиано](/images/piano.png "Фортепиано")
+[![Курочка](/images/chicken.png "Курочка")](http://ru.wikipedia.org/wiki/%D0%9A%D1%83%D1%80%D1%8F%D1%82%D0%B8%D0%BD%D0%B0)
+[![Коровка](/images/cow.png "Коровка")](http://ru.wikipedia.org/wiki/%D0%93%D0%BE%D0%B2%D1%8F%D0%B4%D0%B8%D0%BD%D0%B0)
+[![Свинюшенька](/images/pig.png "Свинюшенька")](http://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D0%B8%D0%BD%D0%B8%D0%BD%D0%B0)
+[![ArchLinux](/images/archlinux.png "ArchLinux")](http://www.archlinux.org/)
+[![Haskell](/images/haskell.png "Haskell")](http://www.haskell.org/haskellwiki/Haskell)
+[![Бодибилдинг](/images/bodybuilding.png "Бодибилдинг")](http://ru.wikipedia.org/wiki/%D0%9A%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D0%B8%D0%B7%D0%BC)
+[![Фортепиано](/images/piano.png "Фортепиано")](http://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%80%D1%82%D0%B5%D0%BF%D0%B8%D0%B0%D0%BD%D0%BE)
 {: #hobbies}
 </div>
 
