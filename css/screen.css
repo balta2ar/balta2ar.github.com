@@ -6,7 +6,6 @@
 
 /* Global Reset */
 
-
 * {
     margin: 0;
     padding: 0;
@@ -18,20 +17,60 @@ html {
     height: 100%;
 }
 
+pre {
+    margin: 10px 0;
+    padding: 10px;
+    border-top: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    /*background: #272822;*/
+    /*background: #FFFFFF;*/
+}
+
+pre span {
+    font-family: Courier, "Courier New", monospace;
+}
+
 *::selection {
     color: white; 
     background: #3A4239; 
 }
 
-body {
-    height: 100%;
-    background: #F8F8F8;
+/*
+input.spoilerbutton {
+    display:inline-block;
 }
+*/
+
+.spoiler {
+    display:none;
+}
+
+input.spoilerbutton:checked + .spoiler {
+    display:block;
+}
+
+  /*
+div.spoilerbutton:active + .spoiler {
+    color: blue;
+    display: block;
+}
+
+.spoilerbutton:focus, .spoiler {
+    color: red;
+    display: none;
+}
+*/
+
+/*
+.spoiler:hover {
+    color: red;
+    visibility: visible;
+}
+*/
 
 #hideoverflow {
     overflow: hidden;
 }
-
 
 article {
     height: 100%;
@@ -53,6 +92,10 @@ article {
     padding-bottom: 15px;
 }
 
+#notextindent {
+     text-indent: 0em;
+}
+
 #post > p {
      text-indent: 2em;
 }
@@ -62,14 +105,6 @@ article {
     padding-top: 20px;
     text-indent: 2em;
 }
-
-
-/*span article {
-    padding-bottom:5000px;
-    margin: 0 0 -5000px 0;
-    overflow: hidden;
-    position: relative;
-}*/
 
 h1 {
     font-size: 1.75em;
@@ -86,7 +121,7 @@ h2 {
 }
 
 h3 {
-    margin: 5px 0;
+    margin: 1em 0 0.5em 0;
 }
 
 ul, h1, h2, p {
@@ -173,6 +208,14 @@ a {
 #post img {
     display: block;
     margin: 20px auto;
+}
+
+:not(pre) > code {
+    border: 1px solid #ddd;
+    background-color: #eef;
+    font-size: 85%;
+    padding: 0 .2em;
+    font-family: Courier, "Courier New", monospace;
 }
 
 .stick img, p.stick {
