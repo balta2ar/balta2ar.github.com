@@ -7,13 +7,20 @@ order: 3
 {% assign active_page = 'about_author' %}
 
 <div style='float:left; width:50%' markdown='1'>
+
+Резюме
+{: .infoheaderleft}
+
+[![Резюме](/images/adobe_ru.png "Резюме")](https://github.com/balta2ar/resume/blob/master/pdf/yuri-bochkarev-ru-resume.pdf?raw=true)
+{: #leftblock}
+
 Деятельность
 {: .infoheaderleft}
 
 [![Github](/images/github.png "Github")](https://github.com/balta2ar)
 [![Bitbucket](/images/bitbucket.png "Bitbucket")](https://bitbucket.org/balta2ar)
 [![Blogspot](/images/blogspot.png "Blogspot")](http://baltazar-bz.blogspot.com)
-{: #activities}
+{: #leftblock}
 
 Учёба
 {: .infoheaderleft}
@@ -22,19 +29,26 @@ order: 3
 [![Articifial Intelligence, Statement of Accomplishment, December 2011](/images/aiclass.png "Articifial Intelligence, Statement of Accomplishment, December 2011")](https://docs.google.com/document/d/1wD_QEJ7mdzxbR_PMVEbZ_tZ0SyakJ_8Y1gBAj_S5Ufg/edit)
 [![Programming a Robotic Car, Statement of Accomplishment, April 2012](/images/aicar.png "Programming a Robotic Car, Statement of Accomplishment, April 2012")](https://docs.google.com/document/d/1LpUyUwh_gGyPyKf-oxTDOy8ncQejwog1jhgMmtf59mY/edit)
 [![Algorithms: Design and Analysis, Part I, Statement of Accomplishment, April 2012](/images/algo.png "Algorithms: Design and Analysis, Part I, Statement of Accomplishment, April 2012")](https://docs.google.com/document/d/1j6LlyJUGM03TxqSImyHeHoa16dSCLZQop6zmrPe8YOw/edit)
-{: #studies}
+{: #leftblock}
 
 </div>
 {::options parse_block_html="true" /}
 
 <div style='float:right; width:50%' markdown='1'>
+
+Resume
+{: .infoheaderright}
+
+[![Резюме](/images/adobe_en.png "Resume")](https://github.com/balta2ar/resume/blob/master/pdf/yuri-bochkarev-en-resume.pdf?raw=true)
+{: #rightblock}
+
 Контакты
 {: .infoheaderright}
 
 <a href='mailto:baltazar.bz@gmail.com'>![Gmail](/images/gmail.png "Gmail")</a>
 <a href='jabber:baltazar.bz@gmail.com'>![Jabber](/images/jabber.png "Jabber")</a>
 [![Twitter](/images/twitter.png "Twitter")](http://twitter.com/baltazar_bz)
-{: #contact}
+{: #rightblock}
 
 
 Интересы
@@ -47,6 +61,6 @@ order: 3
 [![Haskell](/images/haskell.png "Haskell")](http://www.haskell.org/haskellwiki/Haskell)
 [![Бодибилдинг](/images/bodybuilding.png "Бодибилдинг")](http://ru.wikipedia.org/wiki/%D0%9A%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D0%B8%D0%B7%D0%BC)
 [![Фортепиано](/images/piano.png "Фортепиано")](http://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%80%D1%82%D0%B5%D0%BF%D0%B8%D0%B0%D0%BD%D0%BE)
-{: #hobbies}
+{: #rightblock}
 </div>
 

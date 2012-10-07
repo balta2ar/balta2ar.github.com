@@ -307,7 +307,7 @@ footer {
     margin: 20px 0 20px;
 }
 
-#activities, #studies {
+#leftblock {
 /*    margin-left: 22%;*/
     display: inline-block;
     float:right;
@@ -315,7 +315,7 @@ footer {
     margin-right: 1em;
 }
 
-#contact, #hobbies {
+#rightblock {
  /*   margin-right: 22%;*/
     float: left;
     display: inline;
@@ -323,11 +323,10 @@ footer {
     clear: both;
 }
 
-#activities, #studies, #contact, #hobbies {
+#leftblock, #rightblock {
     color: #2E333D;
     padding: 10px 0 0 10px;
     width: 50%;
-    height: 7em;
     clear: both;
 }
 
@@ -336,7 +335,7 @@ footer {
     height: 1.8em;
     padding: 5px 0 0 10px;
     clear: both;
-    margin-top: 8%;
+    margin-top: 5%;
 }
 
 .infoheaderleft {
@@ -386,12 +385,12 @@ footer {
     right: 20%;
 }
 
-#activities img, #studies img, #contact img, #hobbies img {
+#leftblock img, #rightblock img {
     margin: 5px;
     border-bottom: solid 1px transparent;
 }
 
-#activities img:hover, #studies img:hover, #contact img:hover, #hobbies img:hover {
+#leftblock img:hover, #rightblock img:hover {
     border-bottom: 1px dashed #2E333D;
 }
 
