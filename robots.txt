@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://balta2ar.github.com/sitemap.xml 
+Sitemap: http://balta2ar.github.io/sitemap.xml 

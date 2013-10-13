@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: xmlstartlet | All Abouts]]></title>
-  <link href="http://balta2ar.github.com/blog/categories/xmlstartlet/atom.xml" rel="self"/>
-  <link href="http://balta2ar.github.com/"/>
-  <updated>2013-10-13T15:52:25+04:00</updated>
-  <id>http://balta2ar.github.com/</id>
+  <link href="http://balta2ar.github.io/blog/categories/xmlstartlet/atom.xml" rel="self"/>
+  <link href="http://balta2ar.github.io/"/>
+  <updated>2013-10-13T16:03:32+04:00</updated>
+  <id>http://balta2ar.github.io/</id>
   <author>
     <name><![CDATA[Yuri Bochkarev]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Download iTunes U Course - The Hacker Way]]></title>
-    <link href="http://balta2ar.github.com/blog/2013/10/13/download-itunes-u-course-the-hacker-way/"/>
+    <link href="http://balta2ar.github.io/blog/2013/10/13/download-itunes-u-course-the-hacker-way/"/>
     <updated>2013-10-13T13:48:00+04:00</updated>
-    <id>http://balta2ar.github.com/blog/2013/10/13/download-itunes-u-course-the-hacker-way</id>
+    <id>http://balta2ar.github.io/blog/2013/10/13/download-itunes-u-course-the-hacker-way</id>
     <content type="html"><![CDATA[<p>Today, kids, we are going to download iTunes U course almost exclusively from
 the command line.</p>
 
