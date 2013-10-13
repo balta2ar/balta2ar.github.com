@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[All Abouts]]></title>
+  <link href="http://balta2ar.github.com/atom.xml" rel="self"/>
+  <link href="http://balta2ar.github.com/"/>
+  <updated>2013-10-13T15:24:16+04:00</updated>
+  <id>http://balta2ar.github.com/</id>
+  <author>
+    <name><![CDATA[Yuri Bochkarev]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Download iTunes U Course - The Hacker Way]]></title>
+    <link href="http://balta2ar.github.com/blog/2013/10/13/download-itunes-u-course-the-hacker-way/"/>
+    <updated>2013-10-13T13:48:00+04:00</updated>
+    <id>http://balta2ar.github.com/blog/2013/10/13/download-itunes-u-course-the-hacker-way</id>
+    <content type="html"><![CDATA[<p>Today, kids, we are going to download iTunes U course almost exclusively from
+the command line.</p>
+
+<!-- more -->
+
+
+<h2>Why</h2>
+
+<p>The easiest way to do that is to use iTunes to download all that for you.
+Unfortunately, while I have iPod/iPad in my home ecosystem, I don&#8217;t have any
+Mac computers. Thus, I&#8217;m running iTunes in a virtual machine on Windows.
+Imagine my user experience from such combination. Pure pain and suffering.</p>
+
+<p>There wouldn&#8217;t be this post if it was all smooth. For unknown reasons my iTunes
+doesn&#8217;t save downloaded video files. I can see it&#8217;s downloading them, I can
+see the temp file growing, but when it&#8217;s done, puff, I can&#8217;t find the file
+anywhere. Luckily, there is a solution. It is a pity but you still need iTunes
+for a couple of steps.</p>
+
+<h2>How</h2>
+
+<p>OK, let&#8217;s do it. Say, you found an interesting course on iTunes U:</p>
+
+<p><img src="./ml.png"></p>
+
+<h3>Step 1. Subscribe to the course in iTunes</h3>
+
+<h3>Step 2. Copy course url</h3>
+
+<p>Click on any item in the course materials list and
+select &#8220;Copy iTunes U URL&#8221;.</p>
+
+<p><img src="./copy-url.png"></p>
+
+<p>NB: There is <a href="https://itunesu.itunes.apple.com/coursemanager/">iTunes U Course Manager</a>
+web page and I presume you might get the feed URL there (though I really doubt
+you can). However, my country isn&#8217;t enjoying Apple&#8217;s favour.</p>
+
+<p><img src="./bad-country.png"></p>
+
+<h3>Step 3. Download the feed</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -O list.xml https://p1-u.itunes.apple.com/WebObjects/LZStudent.woa/ra/feed/CODBABB3ZC</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Step 4. Extract links and titles</h3>
+
+<p>The feed contains <code>feed/entry</code> items in the format as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+</span><span class='line'>&lt;feed xmlns="http://www.w3.org/2005/Atom" xmlns:itms="http://www.itunes.com/dtds/itunesu-1.0.dtd"&gt;
+</span><span class='line'>    &lt;title type="text"&gt;Machine Learning&lt;/title&gt;
+</span><span class='line'>    &lt;subtitle type="text"&gt;&lt;div&gt;&lt;div&gt;&lt;strong&gt;A real Caltech course...&lt;/subtitle&gt;
+</span><span class='line'>    &lt;updated&gt;2013-06-12T00:19:12PDT&lt;/updated&gt;
+</span><span class='line'>    &lt;link rel="alternate" type="text/html"
+</span><span class='line'>          href="https://p1-u.itunes.apple.com/WebObjects/LZStudent.woa/ra/courses/CODBABB3ZC"/&gt;
+</span><span class='line'>    &lt;id&gt;1/CODBABB3ZC&lt;/id&gt;
+</span><span class='line'>    &lt;itms:courseid&gt;CODBABB3ZC&lt;/itms:courseid&gt;
+</span><span class='line'>    &lt;itms:auditUrl&gt;https://itunesu.itunes.apple.com/audit/CODBABB3ZC&lt;/itms:auditUrl&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    &lt;entry&gt;
+</span><span class='line'>        &lt;author&gt;
+</span><span class='line'>            &lt;name&gt;Dr. Yaser Abu-Mostafa&lt;/name&gt;
+</span><span class='line'>        &lt;/author&gt;
+</span><span class='line'>        &lt;title type="html"&gt;&lt;![CDATA[AC___Lecture 01 slides]]&gt;&lt;/title&gt;
+</span><span class='line'>        &lt;id&gt;1/CODBABB3ZC/MAES7ECEVA&lt;/id&gt;
+</span><span class='line'>        &lt;updated&gt;2013-06-11T23:25:24PDT&lt;/updated&gt;
+</span><span class='line'>        &lt;published&gt;2012-06-14T15:07:36PDT&lt;/published&gt;
+</span><span class='line'>        &lt;summary type="html"&gt;&lt;![CDATA[AC___Lecture 01 slides]]&gt;&lt;/summary&gt;
+</span><span class='line'>        &lt;link rel="enclosure" type="application/pdf"
+</span><span class='line'>              href="http://a1372.phobos.apple.com/us/r30/CobaltPublic/v4/35/56/6a/35566a02-1e0a-3db8-17e2-69be6445ba9b/208-5815754981465838988-ACsld01.pdf"
+</span><span class='line'>    length="300673"/&gt;
+</span><span class='line'>    &lt;/entry&gt;
+</span><span class='line'>
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is very convenient to use <a href="http://xmlstar.sourceforge.net/doc/UG/xmlstarlet-ug.html">xmlstartlet</a>
+to extract titles and links from the feed. Note, however, that xmlstartlet is
+very picky to namespace (thanks to <a href="http://stackoverflow.com/questions/9025492/xmlstarlet-does-not-select-anything">this</a>
+answer). Extraction command will look as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>xml sel -N x="http://www.w3.org/2005/Atom" -t -m //x:entry -v x:title -o "|" -v x:link/@href -n list.xml &gt; fmt.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Step 5. Download the course</h3>
+
+<p>Now it only remains to read titles and links and
+download them. I prefer to use <a href="http://aria2.sourceforge.net/">aria2c</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>IFS='|' && while read a b; do n=$a.${b##*.}; aria2c --allow-overwrite=false --auto-file-renaming=false -o $n $b; done &lt; fmt.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>${b##*.}</code> is a command to get filename extension (see <a href="http://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash">this</a>
+and <a href="http://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html#Shell-Parameter-Expansion">this</a>)</p>
+
+<h2>References</h2>
+
+<ol>
+<li><a href="http://alistairisrael.wordpress.com/2007/09/26/querying-an-xml-document-using-xmlstarlet/">Querying an XML document using XMLStarlet</a></li>
+<li><a href="http://xmlstar.sourceforge.net/doc/UG/xmlstarlet-ug.html">XmlStarlet Command Line XML Toolkit User&#8217;s Guide</a></li>
+<li><a href="http://www.freesoftwaremagazine.com/articles/xml_starlet">XMLStarlet: a Unix toolkit for XML</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
