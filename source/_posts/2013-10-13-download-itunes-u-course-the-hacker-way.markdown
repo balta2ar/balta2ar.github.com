@@ -60,7 +60,7 @@ wget -O list.xml https://p1-u.itunes.apple.com/WebObjects/LZStudent.woa/ra/feed/
 
 The feed contains `feed/entry` items in the format as follows:
 
-```
+``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:itms="http://www.itunes.com/dtds/itunesu-1.0.dtd">
     <title type="text">Machine Learning</title>
