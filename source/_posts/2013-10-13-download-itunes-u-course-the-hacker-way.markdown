@@ -101,7 +101,7 @@ xml sel -N x="http://www.w3.org/2005/Atom" -t -m //x:entry -v x:title -o "|" -v 
 
 ### Step 5. Download the course
 
-Now it only remains to read titles and links and
+Now all that is left is to read titles and links and
 download them. I prefer to use [aria2c](http://aria2.sourceforge.net/)
 
 ```
