@@ -4,7 +4,7 @@
   <title><![CDATA[All Abouts]]></title>
   <link href="http://balta2ar.github.io/atom.xml" rel="self"/>
   <link href="http://balta2ar.github.io/"/>
-  <updated>2013-10-13T16:13:15+04:00</updated>
+  <updated>2013-10-13T16:43:32+04:00</updated>
   <id>http://balta2ar.github.io/</id>
   <author>
     <name><![CDATA[Yuri Bochkarev]]></name>
@@ -68,7 +68,7 @@ you can). However, my country isn&#8217;t enjoying Apple&#8217;s favour.</p>
 
 <p>The feed contains <code>feed/entry</code> items in the format as follows:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -95,33 +95,34 @@ you can). However, my country isn&#8217;t enjoying Apple&#8217;s favour.</p>
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
 <span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-</span><span class='line'>&lt;feed xmlns="http://www.w3.org/2005/Atom" xmlns:itms="http://www.itunes.com/dtds/itunesu-1.0.dtd"&gt;
-</span><span class='line'>    &lt;title type="text"&gt;Machine Learning&lt;/title&gt;
-</span><span class='line'>    &lt;subtitle type="text"&gt;&lt;div&gt;&lt;div&gt;&lt;strong&gt;A real Caltech course...&lt;/subtitle&gt;
-</span><span class='line'>    &lt;updated&gt;2013-06-12T00:19:12PDT&lt;/updated&gt;
-</span><span class='line'>    &lt;link rel="alternate" type="text/html"
-</span><span class='line'>          href="https://p1-u.itunes.apple.com/WebObjects/LZStudent.woa/ra/courses/CODBABB3ZC"/&gt;
-</span><span class='line'>    &lt;id&gt;1/CODBABB3ZC&lt;/id&gt;
-</span><span class='line'>    &lt;itms:courseid&gt;CODBABB3ZC&lt;/itms:courseid&gt;
-</span><span class='line'>    &lt;itms:auditUrl&gt;https://itunesu.itunes.apple.com/audit/CODBABB3ZC&lt;/itms:auditUrl&gt;
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;feed</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/2005/Atom&quot;</span> <span class="na">xmlns:itms=</span><span class="s">&quot;http://www.itunes.com/dtds/itunesu-1.0.dtd&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span>Machine Learning<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;subtitle</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;lt;</span>div<span class="ni">&amp;gt;&amp;lt;</span>div<span class="ni">&amp;gt;&amp;lt;</span>strong<span class="ni">&amp;gt;</span>A real Caltech course...<span class="nt">&lt;/subtitle&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;updated&gt;</span>2013-06-12T00:19:12PDT<span class="nt">&lt;/updated&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;alternate&quot;</span> <span class="na">type=</span><span class="s">&quot;text/html&quot;</span>
+</span><span class='line'>          <span class="na">href=</span><span class="s">&quot;https://p1-u.itunes.apple.com/WebObjects/LZStudent.woa/ra/courses/CODBABB3ZC&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;id&gt;</span>1/CODBABB3ZC<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;itms:courseid&gt;</span>CODBABB3ZC<span class="nt">&lt;/itms:courseid&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;itms:auditUrl&gt;</span>https://itunesu.itunes.apple.com/audit/CODBABB3ZC<span class="nt">&lt;/itms:auditUrl&gt;</span>
 </span><span class='line'>
 </span><span class='line'>
-</span><span class='line'>    &lt;entry&gt;
-</span><span class='line'>        &lt;author&gt;
-</span><span class='line'>            &lt;name&gt;Dr. Yaser Abu-Mostafa&lt;/name&gt;
-</span><span class='line'>        &lt;/author&gt;
-</span><span class='line'>        &lt;title type="html"&gt;&lt;![CDATA[AC___Lecture 01 slides]]&gt;&lt;/title&gt;
-</span><span class='line'>        &lt;id&gt;1/CODBABB3ZC/MAES7ECEVA&lt;/id&gt;
-</span><span class='line'>        &lt;updated&gt;2013-06-11T23:25:24PDT&lt;/updated&gt;
-</span><span class='line'>        &lt;published&gt;2012-06-14T15:07:36PDT&lt;/published&gt;
-</span><span class='line'>        &lt;summary type="html"&gt;&lt;![CDATA[AC___Lecture 01 slides]]&gt;&lt;/summary&gt;
-</span><span class='line'>        &lt;link rel="enclosure" type="application/pdf"
-</span><span class='line'>              href="http://a1372.phobos.apple.com/us/r30/CobaltPublic/v4/35/56/6a/35566a02-1e0a-3db8-17e2-69be6445ba9b/208-5815754981465838988-ACsld01.pdf"
-</span><span class='line'>    length="300673"/&gt;
-</span><span class='line'>    &lt;/entry&gt;
+</span><span class='line'>    <span class="nt">&lt;entry&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;author&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;name&gt;</span>Dr. Yaser Abu-Mostafa<span class="nt">&lt;/name&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/author&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;title</span> <span class="na">type=</span><span class="s">&quot;html&quot;</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[AC___Lecture 01 slides]]&gt;</span><span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;id&gt;</span>1/CODBABB3ZC/MAES7ECEVA<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;updated&gt;</span>2013-06-11T23:25:24PDT<span class="nt">&lt;/updated&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;published&gt;</span>2012-06-14T15:07:36PDT<span class="nt">&lt;/published&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;summary</span> <span class="na">type=</span><span class="s">&quot;html&quot;</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[AC___Lecture 01 slides]]&gt;</span><span class="nt">&lt;/summary&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;enclosure&quot;</span> <span class="na">type=</span><span class="s">&quot;application/pdf&quot;</span>
+</span><span class='line'>              <span class="na">href=</span><span class="s">&quot;http://a1372.phobos.apple.com/us/r30/CobaltPublic/v4/35/56/6a/35566a02-1e0a-3db8-17e2-69be6445ba9b/208-5815754981465838988-ACsld01.pdf&quot;</span>
+</span><span class='line'>    <span class="na">length=</span><span class="s">&quot;300673&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/entry&gt;</span>
 </span><span class='line'>
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>It is very convenient to use <a href="http://xmlstar.sourceforge.net/doc/UG/xmlstarlet-ug.html">xmlstartlet</a>
@@ -129,8 +130,9 @@ to extract titles and links from the feed. Note, however, that xmlstartlet is
 very picky to namespace (thanks to <a href="http://stackoverflow.com/questions/9025492/xmlstarlet-does-not-select-anything">this</a>
 answer). Extraction command will look as follows:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>xml sel -N x="http://www.w3.org/2005/Atom" -t -m //x:entry -v x:title -o "|" -v x:link/@href -n list.xml &gt; fmt.txt</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>xml sel -N x=&quot;http://www.w3.org/2005/Atom&quot; -t -m //x:entry -v x:title -o &quot;|&quot; -v x:link/@href -n list.xml &gt; fmt.txt
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>Step 5. Download the course</h3>
@@ -138,8 +140,9 @@ answer). Extraction command will look as follows:</p>
 <p>Now all that is left is to read titles and links and
 download them. I prefer to use <a href="http://aria2.sourceforge.net/">aria2c</a></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>IFS='|' && while read a b; do n=$a.${b##*.}; aria2c --allow-overwrite=false --auto-file-renaming=false -o $n $b; done &lt; fmt.txt</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>IFS=&#39;|&#39; <span class="err">&amp;&amp;</span> while read a b; do n=$a.${b##*.}; aria2c --allow-overwrite=false --auto-file-renaming=false -o $n $b; done <span class="nt">&lt; fmt.txt</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p><code>${b##*.}</code> is a command to get filename extension (see <a href="http://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash">this</a>

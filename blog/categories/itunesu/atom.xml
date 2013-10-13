@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iTunesU | All Abouts]]></title>
   <link href="http://balta2ar.github.io/blog/categories/itunesu/atom.xml" rel="self"/>
   <link href="http://balta2ar.github.io/"/>
-  <updated>2013-10-13T16:13:15+04:00</updated>
+  <updated>2013-10-13T16:43:32+04:00</updated>
   <id>http://balta2ar.github.io/</id>
   <author>
     <name><![CDATA[Yuri Bochkarev]]></name>
@@ -68,7 +68,7 @@ wget -O list.xml https://p1-u.itunes.apple.com/WebObjects/LZStudent.woa/ra/feed/
 
 <p>The feed contains <code>feed/entry</code> items in the format as follows:</p>
 
-<p>```
+<p>``` xml
 &lt;?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:itms="http://www.itunes.com/dtds/itunesu-1.0.dtd"></p>
 
