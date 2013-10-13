@@ -4,7 +4,7 @@
   <title><![CDATA[All Abouts]]></title>
   <link href="http://balta2ar.github.io/atom.xml" rel="self"/>
   <link href="http://balta2ar.github.io/"/>
-  <updated>2013-10-13T16:43:32+04:00</updated>
+  <updated>2013-10-13T19:57:40+04:00</updated>
   <id>http://balta2ar.github.io/</id>
   <author>
     <name><![CDATA[Yuri Bochkarev]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress to rule them all]]></title>
+    <link href="http://balta2ar.github.io/blog/2013/10/13/octopress-to-rule-them-all/"/>
+    <updated>2013-10-13T19:11:00+04:00</updated>
+    <id>http://balta2ar.github.io/blog/2013/10/13/octopress-to-rule-them-all</id>
+    <content type="html"><![CDATA[<p>It&#8217;s been a long while since I decided to switch from <a href="http://baltazar-bz.blogspot.ru/">Google Blogspot</a>
+to Octopress and start blogging like a geek. For almost a year I couldn&#8217;t
+force myself to write even a short post. There were different reasons to that,
+and some of them are technical. Being a complete rookie to Ruby, I was scared
+by all these daunting rake commands and Octopress machinery. It actually helped
+me to write down and summarize the commands that I need in a single place. Now
+I&#8217;d like them to be a separate post just as a little reminder to myself.</p>
+
+<!-- more -->
+
+
+<p>What I liked about Octopress immediately is markdown, of course. It wasn&#8217;t
+nearly convenient to fix an old post in Blogspot as it is in Octopress. You can
+edit Blogspot posts right onsite to make it easier. Not for me. The feature of
+switching modes between compose/HTML didn&#8217;t help at all. Stop messing with
+HTML in every post was a very attactive feature of Octopress. Besides, having
+a blog in public so that people can send you pull requests is so cool that it
+must be declared illegal.</p>
+
+<p>Anyway, I made my decision and here it goes. I followed carefully <a href="http://octopress.org/docs/">Octopress
+documentation</a>. It wasn&#8217;t a piece of cake to install
+correct version of Ruby, all necessary bundles, deal with <a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">broken</a>
+<a href="https://github.com/tmm1/pygments.rb/issues/45">pygments</a>, configure my own
+color scheme, and got it up and running eventually. Hopefully, I got through
+all that and now it&#8217;s time to relax in a serene joy and write one post after
+another like a mad.</p>
+
+<p>To do that, I use the following commands.</p>
+
+<h3>1. Switch to source branch</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git checkout source</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2. Activate rake</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>source /home/bz/.rvm/scripts/rvm
+</span><span class='line'>rvm use 1.9.3</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3. Setup environment for pygmentize</h3>
+
+<p>The problem with pygmentize out of the box is that mentos.py in my version
+calls for <code>/usr/bin/env python</code> which is <code>python3</code> in ArchLinux by default.
+However, <code>python2</code> is required. To fix that, I created virtualenv where
+<code>python2.7</code> is active by default. Activate it before generating the blog:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>source ~/.virtualenvs/blog_env/bin/activate</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>4. Run preview/generate server</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>jekyll --auto --server --future</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other useful commands might be:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview
+</span><span class='line'>rake watch</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>5. Create new post</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post\["How I spent the summer"\]</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>6. Deploy</h3>
+
+<p>When ready, I usually do <code>rake generate</code> once again (just to be safe),
+commit to the source branch, push and finally deploy. All this happens in the
+source branch of the blog (<code>rake deploy</code> automatically deals with <code>master</code>):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m "New post about the last summer"
+</span><span class='line'>git push
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And I got new post upstream in a matter of seconds.</p>
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Download iTunes U Course - The Hacker Way]]></title>
