@@ -17,6 +17,8 @@ experience with Outpost firewall I couldn't find an easy and convenient way
 to shape traffic in Linux. Judging by the amount of similar questions over
 the Internet it's unobvious not only to me but to many other users.
 
+<!-- more -->
+
 It appears there are different ways to achieve that in Linux. I personally found
 two of them useful: [trickle][trickle] and [tc][tc].
 
