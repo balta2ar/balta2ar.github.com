@@ -4,7 +4,7 @@
   <title><![CDATA[All Abouts]]></title>
   <link href="http://balta2ar.github.io/atom.xml" rel="self"/>
   <link href="http://balta2ar.github.io/"/>
-  <updated>2013-10-13T20:13:09+04:00</updated>
+  <updated>2013-11-23T17:54:49+04:00</updated>
   <id>http://balta2ar.github.io/</id>
   <author>
     <name><![CDATA[Yuri Bochkarev]]></name>
@@ -12,6 +12,218 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bandwidth shaping in Linux]]></title>
+    <link href="http://balta2ar.github.io/blog/2013/11/23/bandwidth-shaping-in-linux/"/>
+    <updated>2013-11-23T17:01:00+04:00</updated>
+    <id>http://balta2ar.github.io/blog/2013/11/23/bandwidth-shaping-in-linux</id>
+    <content type="html"><![CDATA[<p>It&#8217;s always been a problem for me to shape traffic in Linux. After Windows
+experience with Outpost firewall I couldn&#8217;t find an easy and convenient way
+to shape traffic in Linux. Judging by the amount of similar questions over
+the Internet it&#8217;s unobvious not only to me but to many other users.</p>
+
+<p>It appears there are different ways to achieve that in Linux. I personally found
+two of them useful: <a href="http://monkey.org/~marius/pages/?page=trickle">trickle</a> and <a href="http://tldp.org/HOWTO/Traffic-Control-HOWTO/intro.html">tc</a>.</p>
+
+<h2>trickle</h2>
+
+<p><code>trickle</code> is simple and easy to use, just run the program you want to limit
+and specify the bandwith:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ trickle -d 20kb wget http://mirror.rol.ru/archlinux/iso/2013.11.01/archlinux-2013.11.01-dual.iso
+</span><span class='line'>trickle: Could not reach trickled, working independently: No such file or directory
+</span><span class='line'>--2013-11-23 17:09:37--  http://mirror.rol.ru/archlinux/iso/2013.11.01/archlinux-2013.11.01-dual.iso
+</span><span class='line'>Resolving mirror.rol.ru (mirror.rol.ru)... 194.67.1.114
+</span><span class='line'>Connecting to mirror.rol.ru (mirror.rol.ru)|194.67.1.114|:80... connected.
+</span><span class='line'>HTTP request sent, awaiting response... 200 OK
+</span><span class='line'>Length: 541065216 (516M) [application/octet-stream]
+</span><span class='line'>Saving to: ‘archlinux-2013.11.01-dual.iso’
+</span><span class='line'>
+</span><span class='line'> 0% [                                                                                      ] 144,540     20.0KB/s  eta 5h 53m</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>trickle</code> works in userspace. It takes advantage of the unix loader preloading
+functionality to intercept <code>read</code>/<code>write</code> calls. See the <a href="http://monkey.org/~marius/trickle/trickle.pdf">paper</a> for the
+details.</p>
+
+<h2>tc</h2>
+
+<p>tc is a different beast. It&#8217;s quite a complex thing for a newbie like me though
+it&#8217;s powerful. tc allows you to create intricate rules to shape your traffic.
+The problem is that only outgoing traffic can be shaped in a graceful way. In
+incoming traffic you can only brutally drop packets.</p>
+
+<p>This is nasty but luckily there is a way around called <a href="http://www.linuxfoundation.org/collaborate/workgroups/networking/ifb">The Intermediate
+Functional Block device</a>. With this module you can reroute incoming traffic
+from ifb device to eth0 so that the traffic will be treated as outgoing when
+leaving ifb.</p>
+
+<p>I should&#8217;ve propably taken a weekend to dig really deep into tc functionality
+and master it but instead I went the easy way. After googling for a while I
+found this brilliant question/answer and this script:</p>
+
+<ul>
+<li><a href="http://serverfault.com/questions/350023/tc-ingress-policing-and-ifb-mirroring">Tc: ingress policing and ifb mirroring</a></li>
+<li><a href="https://github.com/rfrail3/misc/blob/master/tc/traffic-control.sh">traffic-control.sh</a></li>
+</ul>
+
+
+<p>Inspired by this two wonderful sources I came up with my own version:</p>
+
+<figure class='code'><figcaption><span>bandwidth.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># $1 -- incoming bandwidth</span>
+</span><span class='line'><span class="c"># $2 -- outgoing bandwidth</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># bandwidth.sh init -- modprobe &amp;&amp; ip up</span>
+</span><span class='line'><span class="c"># bandwidth.sh x y  -- set incoming bandwidth to x, outgoing to y</span>
+</span><span class='line'><span class="c"># bandwidth.sh      -- remove limits</span>
+</span><span class='line'><span class="c"># bandwidth.sh - y  -- remove incoming limits, set outgoing limit</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># init</span>
+</span><span class='line'><span class="c"># modprobe ifb numifbs=1</span>
+</span><span class='line'><span class="c"># ip link set dev ifb0 up # repeat for ifb1, ifb2, ...</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">PHY</span><span class="o">=</span>eth0
+</span><span class='line'><span class="nv">VIR</span><span class="o">=</span>ifb0
+</span><span class='line'><span class="nv">IN</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nv">OUT</span><span class="o">=</span><span class="nv">$2</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>go<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;$*&quot;</span>
+</span><span class='line'>    <span class="nb">eval</span> <span class="s2">&quot;$*&quot;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$?</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span>-eq 1 <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">    if</span> <span class="o">[</span> <span class="nv">$1</span> <span class="o">==</span> <span class="s2">&quot;init&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">        </span><span class="nb">echo</span> <span class="s2">&quot;Initializing&quot;</span>
+</span><span class='line'>        go modprobe ifb <span class="nv">numifbs</span><span class="o">=</span>1
+</span><span class='line'>        go ip link <span class="nb">set </span>dev ifb0 up
+</span><span class='line'>        <span class="nb">exit </span>0
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span> <span class="s2">&quot;$IN&quot;</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">IN</span><span class="o">=</span>
+</span><span class='line'><span class="o">[</span> <span class="s2">&quot;$OUT&quot;</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">OUT</span><span class="o">=</span>
+</span><span class='line'>
+</span><span class='line'>go tc qdisc del dev <span class="nv">$PHY</span> root       <span class="c"># clear outgoing</span>
+</span><span class='line'>go tc qdisc del dev <span class="nv">$PHY</span> ingress    <span class="c"># clear incoming</span>
+</span><span class='line'>go tc qdisc del dev <span class="nv">$VIR</span> root       <span class="c"># clean incoming</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span> <span class="nv">$# </span>-eq 0 <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>0
+</span><span class='line'>
+</span><span class='line'>go tc qdisc add dev <span class="nv">$PHY</span> handle ffff: ingress
+</span><span class='line'>go tc filter add dev <span class="nv">$PHY</span> parent ffff: protocol ip u32 match u32 0 0 action mirred egress redirect dev ifb0
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;$IN&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'>    <span class="c"># incoming</span>
+</span><span class='line'>    go tc qdisc add dev <span class="nv">$VIR</span> root handle 1: htb default 10
+</span><span class='line'>    go tc class add dev <span class="nv">$VIR</span> parent 1: classid 1:1 htb rate <span class="nv">$IN</span>
+</span><span class='line'>    go tc class add dev <span class="nv">$VIR</span> parent 1:1 classid 1:10 htb rate <span class="nv">$IN</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;$OUT&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'>    <span class="c"># outgoing</span>
+</span><span class='line'>    go tc qdisc add dev <span class="nv">$PHY</span> root handle 1: htb default 10
+</span><span class='line'>    go tc class add dev <span class="nv">$PHY</span> parent 1: classid 1:1 htb rate <span class="nv">$OUT</span>
+</span><span class='line'>    go tc class add dev <span class="nv">$PHY</span> parent 1:1 classid 1:10 htb rate <span class="nv">$OUT</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also get the script <a href="https://gist.github.com/balta2ar/7614370">here</a>. Now traffic shaping is a matter of
+a couple of calls:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo bandwidth.sh init          <span class="c"># load ifb kernel module</span>
+</span><span class='line'>sudo bandwidth.sh 100kbps       <span class="c"># set incoming limit</span>
+</span><span class='line'>sudo bandwidth.sh - 200kbps     <span class="c"># remove incoming limit, set outgoing limit</span>
+</span><span class='line'>sudo bandwidth.sh 10kbps 20kbps <span class="c"># set both incoming &amp; outgoing limits</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The only thing that I miss now is shaping traffic for each process individually
+and changing limits on the fly.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress to rule them all]]></title>
