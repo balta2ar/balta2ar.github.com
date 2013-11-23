@@ -24,8 +24,7 @@ two of them useful: [trickle][trickle] and [tc][tc].
 
 ## trickle
 
-`trickle` is simple and easy to use, just run the program you want to limit
-and specify the bandwith:
+`trickle` is simple and easy to use, just run the program and specify its bandwidth:
 
 ```
 $ trickle -d 20kb wget http://mirror.rol.ru/archlinux/iso/2013.11.01/archlinux-2013.11.01-dual.iso
@@ -41,15 +40,14 @@ Saving to: ‘archlinux-2013.11.01-dual.iso’
 ```
 
 `trickle` works in userspace. It takes advantage of the unix loader preloading
-functionality to intercept `read`/`write` calls. See the [paper][paper] for the
-details.
+functionality to intercept `read`/`write` calls. See the [paper][paper] for details.
 
 ## tc
 
-tc is a different beast. It's quite a complex thing for a newbie like me though
-it's powerful. tc allows you to create intricate rules to shape your traffic.
-The problem is that only outgoing traffic can be shaped in a graceful way. In
-incoming traffic you can only brutally drop packets.
+tc is a different beast. It's quite a complex thing for a newbie like me and a powerful one.
+tc allows you to create intricate rules to shape your traffic.
+The problem is that only outgoing traffic can be shaped in a graceful way. As for the
+incoming traffic, you can only brutally drop packets there.
 
 This is nasty but luckily there is a way around called [The Intermediate
 Functional Block device][ifb]. With this module you can reroute incoming traffic
