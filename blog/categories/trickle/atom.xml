@@ -4,7 +4,7 @@
   <title><![CDATA[Category: trickle | All Abouts]]></title>
   <link href="http://balta2ar.github.io/blog/categories/trickle/atom.xml" rel="self"/>
   <link href="http://balta2ar.github.io/"/>
-  <updated>2013-11-23T17:54:49+04:00</updated>
+  <updated>2013-11-23T17:56:37+04:00</updated>
   <id>http://balta2ar.github.io/</id>
   <author>
     <name><![CDATA[Yuri Bochkarev]]></name>
@@ -22,6 +22,9 @@
 experience with Outpost firewall I couldn't find an easy and convenient way
 to shape traffic in Linux. Judging by the amount of similar questions over
 the Internet it's unobvious not only to me but to many other users.</p>
+
+<!-- more -->
+
 
 <p>It appears there are different ways to achieve that in Linux. I personally found
 two of them useful: <a href="http://monkey.org/~marius/pages/?page=trickle">trickle</a> and <a href="http://tldp.org/HOWTO/Traffic-Control-HOWTO/intro.html">tc</a>.</p>
