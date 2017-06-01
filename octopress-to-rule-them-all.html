@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>“Octopress to rule them all”</title>
+        <link rel="stylesheet" href="http://balta2ar.github.io/theme/css/main.css" />
+        <link href="http://balta2ar.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Mostly Technical Atom Feed" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://balta2ar.github.io/">Mostly Technical </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="http://balta2ar.github.io/category/misc.html">misc</a></li>
+                </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://balta2ar.github.io/octopress-to-rule-them-all.html" rel="bookmark"
+           title="Permalink to “Octopress to rule them all”"><span class="dquo">&#8220;</span>Octopress to rule them&nbsp;all&#8221;</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <span>Sun 13 October 2013</span>
+
+</footer><!-- /.post-info -->      <p>It&#8217;s been a long while since I decided to switch from <a href="http://baltazar-bz.blogspot.ru/">Google Blogspot</a>
+to Octopress and start blogging like a geek. For almost a year I couldn&#8217;t
+force myself to write even a short post. There were different reasons to that,
+and some of them are technical. Being a complete rookie to Ruby, I was scared
+by all these daunting rake commands and Octopress machinery. It actually helped
+me to write down and summarize the commands that I need in a single place. Now
+I&#8217;d like them to be a separate post just as a little reminder to&nbsp;myself.</p>
+<!-- more -->
+
+<p>What I liked about Octopress immediately is markdown, of course. It wasn&#8217;t
+nearly convenient to fix an old post in Blogspot as it is in Octopress. You can
+edit Blogspot posts right onsite to make it easier. Not for me. The feature of
+switching modes between compose/<span class="caps">HTML</span> didn&#8217;t help at all. Stop messing with
+<span class="caps">HTML</span> in every post was a very attactive feature of Octopress. Besides, having
+a blog in public so that people can send you pull requests is so cool that it
+must be declared&nbsp;illegal.</p>
+<p>Anyway, I made my decision and here it goes. I followed carefully <a href="http://octopress.org/docs/">Octopress
+documentation</a>. It wasn&#8217;t a piece of cake to install
+correct version of Ruby, all necessary bundles, deal with <a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">broken</a>
+<a href="https://github.com/tmm1/pygments.rb/issues/45">pygments</a>, configure my own
+color scheme, and got it up and running eventually. Hopefully, I got through
+all that and now it&#8217;s time to relax in a serene joy and write one post after
+another like a&nbsp;mad.</p>
+<p>To do that, I use the following&nbsp;commands.</p>
+<h3>1. Switch to source&nbsp;branch</h3>
+<div class="highlight"><pre><span></span>git checkout source
+</pre></div>
+
+
+<h3>2. Activate&nbsp;rake</h3>
+<div class="highlight"><pre><span></span>source /home/bz/.rvm/scripts/rvm
+rvm use 1.9.3
+</pre></div>
+
+
+<h3>3. Setup environment for&nbsp;pygmentize</h3>
+<p>The problem with pygmentize out of the box is that mentos.py in my version
+calls for <code>/usr/bin/env python</code> which is <code>python3</code> in ArchLinux by default.
+However, <code>python2</code> is required. To fix that, I created virtualenv where
+<code>python2.7</code> is active by default. Activate it before generating the&nbsp;blog:</p>
+<div class="highlight"><pre><span></span>source ~/.virtualenvs/blog_env/bin/activate
+</pre></div>
+
+
+<h3>4. Run preview/generate&nbsp;server</h3>
+<div class="highlight"><pre><span></span>jekyll --auto --server --future
+</pre></div>
+
+
+<p>Other useful commands might&nbsp;be:</p>
+<div class="highlight"><pre><span></span>rake preview
+rake watch
+</pre></div>
+
+
+<h3>5. Create new&nbsp;post</h3>
+<div class="highlight"><pre><span></span>rake new_post\[&quot;How I spent the summer&quot;\]
+</pre></div>
+
+
+<h3>6.&nbsp;Deploy</h3>
+<p>When ready, I usually do <code>rake generate</code> once again (just to be safe),
+commit to the source branch, push and finally deploy. All this happens in the
+source branch of the blog (<code>rake deploy</code> automatically deals with <code>master</code>):</p>
+<div class="highlight"><pre><span></span>rake generate
+git add .
+git commit -m &quot;New post about the last summer&quot;
+git push
+rake deploy
+</pre></div>
+
+
+<p>And I got new post upstream in a matter of&nbsp;seconds.</p>
+<hr>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://balta2ar.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme <a href="https://github.com/blueicefield/pelican-blueidea/">blueidea</a>, inspired by the default theme.</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

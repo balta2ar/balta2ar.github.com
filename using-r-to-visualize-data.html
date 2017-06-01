@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>“Using R to visualize data”</title>
+        <link rel="stylesheet" href="http://balta2ar.github.io/theme/css/main.css" />
+        <link href="http://balta2ar.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Mostly Technical Atom Feed" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://balta2ar.github.io/">Mostly Technical </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="http://balta2ar.github.io/category/misc.html">misc</a></li>
+                </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://balta2ar.github.io/using-r-to-visualize-data.html" rel="bookmark"
+           title="Permalink to “Using R to visualize data”"><span class="dquo">&#8220;</span>Using R to visualize&nbsp;data&#8221;</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <span>Fri 03 May 2013</span>
+
+</footer><!-- /.post-info -->      <p>R is a great tool for visualising data. Recently I&#8217;ve got a chance to work on a
+project which handles rather big amounts of data. I was told the data is big but
+I&#8217;ve never seen any visuals myself. One day I decided to collect more
+information about the data and plot some&nbsp;graphics.</p>
+<!-- more -->
+
+<p>Initially data was collected into csv files of the following&nbsp;structure:</p>
+<div class="highlight"><pre><span></span>client,type,subtype,size,name
+bidswitch,aggregates,predict_price_2,114876,2013-02-15-00.bidswitch.prod.predict_price_2.tsv.gz
+admaxasia,aggregates,budget_4,10398,2013-02-14_17:25:50.2013-02-15_00:15:00.admaxasia.prod.budget_4.tsv.gz
+tokyo,logs,pixel,3802377,2013-02-15-19-30-00.CET.pixel_v36.userverlua-ireland22_338a1.log.gz
+tokyo,logs,pixel,2695996,2013-02-15-19-30-00.CET.pixel_v36.userverlua-ireland25_a9a45.log.gz
+</pre></div>
+
+
+<p>Later the format has changed and a few fields were added: <code>mtime</code>, <code>user</code>,
+<code>group</code>, <code>perm</code>. However in this acticle we will only need <code>client</code> and <code>size</code>
+fields.</p>
+<h2>Know your&nbsp;enemy</h2>
+<p>So basically what I wanted to know is what amounts of data are flowing through
+the system? I was curious to know the number of files for each client and their
+total&nbsp;size.</p>
+<div class="highlight"><pre><span></span>R<span class="o">&gt;</span> data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&#39;all/raw/files-2013-02-15.csv&#39;</span><span class="p">)</span>
+R<span class="o">&gt;</span> <span class="kp">dim</span><span class="p">(</span>data<span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">167247</span>      <span class="m">5</span>
+R<span class="o">&gt;</span> <span class="kp">names</span><span class="p">(</span>data<span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;client&quot;</span>  <span class="s">&quot;type&quot;</span>    <span class="s">&quot;subtype&quot;</span> <span class="s">&quot;size&quot;</span>    <span class="s">&quot;name&quot;</span>   
+R<span class="o">&gt;</span> <span class="kp">length</span><span class="p">(</span><span class="kp">list.files</span><span class="p">(</span><span class="s">&#39;all/raw&#39;</span><span class="p">))</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">74</span>
+</pre></div>
+
+
+<p>Not many files yet, but they&#8217;re counting every day and we can see something
+interesting&nbsp;today.</p>
+<h2>First&nbsp;steps</h2>
+<p>My first step was to take standart plotting functions and get somewhat
+acceptable plot where I can see the players. Being a novice in R I can say it
+was not that easy. After a lot of googling I got my first working prototype
+and it appeared to be quite lengthy and&nbsp;verbose.</p>
+<div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># Plot number of files and total size of files per client from csv.</span>
+<span class="c1">#</span>
+plotNullt <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">file</span><span class="p">)</span> <span class="p">{</span>
+    par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+
+    d <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="kp">file</span><span class="p">,</span> head<span class="o">=</span><span class="bp">T</span><span class="p">,</span> colClasses<span class="o">=</span><span class="s">&#39;character&#39;</span><span class="p">)</span>
+    d<span class="o">$</span>size <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span>d<span class="o">$</span>size<span class="p">)</span>
+    sizes <span class="o">&lt;-</span> aggregate<span class="p">(</span>d<span class="o">$</span>size<span class="p">,</span> by<span class="o">=</span><span class="kt">list</span><span class="p">(</span>client <span class="o">=</span> d<span class="o">$</span>client<span class="p">),</span> FUN<span class="o">=</span><span class="kp">sum</span><span class="p">)</span>
+    sizes<span class="o">$</span>x <span class="o">&lt;-</span> sizes<span class="o">$</span>x <span class="o">%/%</span> <span class="p">(</span><span class="m">1024</span> <span class="o">^</span> <span class="m">2</span><span class="p">)</span> <span class="c1"># b to Mb</span>
+    total_size <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span>d<span class="o">$</span>size<span class="p">)</span> <span class="o">%/%</span> <span class="p">(</span><span class="m">1024</span> <span class="o">^</span> <span class="m">2</span><span class="p">)</span>
+    total_files <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>d<span class="p">)</span>
+
+    <span class="c1"># plot data size info</span>
+    K <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>sizes<span class="o">$</span>x<span class="p">)</span>
+    ord <span class="o">&lt;-</span> <span class="kp">order</span><span class="p">(</span>sizes<span class="o">$</span>x<span class="p">,</span> decreasing<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+    par<span class="p">(</span>oma<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">))</span>
+    main <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&#39;Mb per client (%s, total size = %dMb)&#39;</span><span class="p">,</span> <span class="kp">file</span><span class="p">,</span> total_size<span class="p">)</span>
+    a <span class="o">&lt;-</span> barplot<span class="p">(</span>sizes<span class="o">$</span>x<span class="p">[</span>ord<span class="p">],</span> axes<span class="o">=</span><span class="bp">F</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&#39;Mb&#39;</span><span class="p">,</span> main<span class="o">=</span>main<span class="p">)</span>
+    m <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span>sizes<span class="o">$</span>x<span class="p">)</span>
+    axis<span class="p">(</span>side<span class="o">=</span><span class="m">1</span><span class="p">,</span> at<span class="o">=</span>a<span class="p">,</span> labels<span class="o">=</span>sizes<span class="o">$</span>client<span class="p">[</span>ord<span class="p">],</span> las<span class="o">=</span><span class="m">3</span><span class="p">)</span>
+    axis<span class="p">(</span>side<span class="o">=</span><span class="m">2</span><span class="p">,</span> at<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> m<span class="p">,</span> <span class="m">5000</span><span class="p">))</span>
+
+    <span class="c1"># files per client</span>
+    clients <span class="o">&lt;-</span> <span class="kp">unique</span><span class="p">(</span>d<span class="o">$</span>client<span class="p">)</span>
+    x <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>clients<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">nrow</span><span class="p">(</span>d<span class="p">[</span>d<span class="o">$</span>client <span class="o">==</span> x<span class="p">,</span> <span class="p">]))</span>
+    lines <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>client<span class="o">=</span>clients<span class="p">,</span> files<span class="o">=</span><span class="kt">array</span><span class="p">(</span>x<span class="p">))</span>
+
+    <span class="c1"># plot # of files info</span>
+    ord <span class="o">&lt;-</span> <span class="kp">order</span><span class="p">(</span>lines<span class="o">$</span>files<span class="p">,</span> decreasing<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+    main <span class="o">&lt;-</span> <span class="kp">sprintf</span><span class="p">(</span><span class="s">&#39;# of files per client (%s, total # of files = %d)&#39;</span><span class="p">,</span> <span class="kp">file</span><span class="p">,</span> total_files<span class="p">)</span>
+    a <span class="o">&lt;-</span> barplot<span class="p">(</span>lines<span class="o">$</span>files<span class="p">[</span>ord<span class="p">],</span> axes<span class="o">=</span><span class="bp">F</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&#39;# of files&#39;</span><span class="p">,</span> main<span class="o">=</span>main<span class="p">)</span>
+    m <span class="o">&lt;-</span> <span class="kp">max</span><span class="p">(</span>lines<span class="o">$</span>files<span class="p">)</span>
+    axis<span class="p">(</span>side<span class="o">=</span><span class="m">1</span><span class="p">,</span> at<span class="o">=</span>a<span class="p">,</span> labels<span class="o">=</span>lines<span class="o">$</span>client<span class="p">[</span>ord<span class="p">],</span> las<span class="o">=</span><span class="m">3</span><span class="p">)</span>
+    axis<span class="p">(</span>side<span class="o">=</span><span class="m">2</span><span class="p">,</span> at<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> m<span class="p">,</span> <span class="m">500</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>In this function we&#8217;re plotting two plots. We use <code>par</code> and <code>mfrow</code> to specify
+the number of rows and columns of subplots in our main&nbsp;plot.</p>
+<p>Next we read the data from the file, making sure we get <code>size</code> column as numeric
+values. It took me a while to figure out how to use <code>aggregate</code> the right way.
+We use it to find the sum of file sizes for each client. This could probably be
+implemented using powerful
+<a href="http://cran.r-project.org/web/packages/plyr/index.html">plyr</a> package but I&#8217;m
+not familiar with it yet. It&#8217;s one line of code for aggregation already which is
+good enough. Next we divide aggregated sums by 1024 ^ 2 to represent values in
+Mb. Total size and total number of files is also&nbsp;remembered.</p>
+<p>After that we draw our first plot. The most challenging part here was to provide
+correct ordering: I wanted clients to be sorted in a decreasing order of their
+respective values, be it file sizes or number of files. Another tricky part was
+to rotate the axis labels by 90 degrees and to add more ticks to the axis.
+The former one was solved with <code>axis</code> function and <code>las</code> parameter. The latter
+one was simpler and only required to use <code>at</code> and <code>seq</code>.</p>
+<p>Next I&#8217;m using <code>sapply</code> to calculate the number of files per client. This is
+weird and I don&#8217;t know why I didn&#8217;t use <code>aggregate</code> again, it could be much&nbsp;simpler.</p>
+<p>And pretty much the same story with the second plot. The code is basically the
+same and except of a few different lines. The result looks as&nbsp;follows:</p>
+<!-- {% img ./std-both-count-size.png %} -->
+
+<p><img alt="Alt text" src="http://balta2ar.github.io/images/std-both-count-size.png"></p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://balta2ar.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme <a href="https://github.com/blueicefield/pelican-blueidea/">blueidea</a>, inspired by the default theme.</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

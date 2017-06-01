@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://balta2ar.github.io/sitemap.xml 

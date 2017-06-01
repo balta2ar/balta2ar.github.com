@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>“Test new post”</title>
+        <link rel="stylesheet" href="http://balta2ar.github.io/theme/css/main.css" />
+        <link href="http://balta2ar.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Mostly Technical Atom Feed" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="http://balta2ar.github.io/">Mostly Technical </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="http://balta2ar.github.io/category/misc.html">misc</a></li>
+                </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://balta2ar.github.io/drafts/test-new-post.html" rel="bookmark"
+           title="Permalink to “Test new post”"><span class="dquo">&#8220;</span>Test new&nbsp;post&#8221;</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <span>Tue 09 April 2013</span>
+
+</footer><!-- /.post-info -->      <p>Hello,&nbsp;guys!</p>
+<p>Today I would like to share some cool code with you. Stay&nbsp;tuned!</p>
+<!--more-->
+
+<p>So here is that magic&nbsp;code:</p>
+<p><span class="dquo">&#8220;</span>` python Magic code
+class SimpleFeedDelivery(object):
+    def <strong>init</strong>(self, feed_, source, sink, config_):
+        self.feed = feed_
+        self.source = source
+        self.sink = sink
+        self.config =&nbsp;config_</p>
+<div class="highlight"><pre><span></span>def source_path(self):
+    return os.path.join(self.source.base_dir,
+                        self.source.dir,
+                        self.feed.name)
+
+def sink_path(self):
+    return os.path.join(self.sink.base_dir,
+                        self.source.dir,
+                        self.feed.name)
+
+def run(self):
+    rate = self.config.get(const.CONFIG_KEY_DOWNLOAD_RATE,
+                           const.DEFAULT_DOWNLOAD_RATE)
+    reader_ = self.source.open(self.source_path())
+    rlim = reader.RateLimitReader(reader_, rate)
+    rmeas = reader.MeasuredReader(rlim)
+    self.sink.upload(rmeas, self.sink_path())
+</pre></div>
+
+
+<p><span class="dquo">&#8220;</span>`</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://balta2ar.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme <a href="https://github.com/blueicefield/pelican-blueidea/">blueidea</a>, inspired by the default theme.</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
