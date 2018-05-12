@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Mostly Technical</title>
+    <link>https://balta2ar.github.io/posts/</link>
+    <description>Recent content in Posts on Mostly Technical</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 Nov 2013 17:01:00 +0300</lastBuildDate>
+    
+	<atom:link href="https://balta2ar.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bandwidth shaping in Linux</title>
+      <link>https://balta2ar.github.io/posts/2013-11-23-bandwidth-shaping-in-linux/</link>
+      <pubDate>Sat, 23 Nov 2013 17:01:00 +0300</pubDate>
+      
+      <guid>https://balta2ar.github.io/posts/2013-11-23-bandwidth-shaping-in-linux/</guid>
+      <description>It&amp;rsquo;s always been a problem for me to shape traffic in Linux. After Windows experience with Outpost firewall I couldn&amp;rsquo;t find an easy and convenient way to shape traffic in Linux. Judging by the amount of similar questions over the Internet it&amp;rsquo;s unobvious not only to me but to many other users.
+It appears there are different ways to achieve that in Linux. I personally found two of them useful: trickle and tc.</description>
+    </item>
+    
+    <item>
+      <title>Octopress to rule them all</title>
+      <link>https://balta2ar.github.io/posts/2013-10-13-octopress-to-rule-them-all/</link>
+      <pubDate>Sun, 13 Oct 2013 19:11:00 +0300</pubDate>
+      
+      <guid>https://balta2ar.github.io/posts/2013-10-13-octopress-to-rule-them-all/</guid>
+      <description>It&amp;rsquo;s been a long while since I decided to switch from Google Blogspot to Octopress and start blogging like a geek. For almost a year I couldn&amp;rsquo;t force myself to write even a short post. There were different reasons to that, and some of them are technical. Being a complete rookie to Ruby, I was scared by all these daunting rake commands and Octopress machinery. It actually helped me to write down and summarize the commands that I need in a single place.</description>
+    </item>
+    
+    <item>
+      <title>Downloading iTunes U Course - The Hacker Way</title>
+      <link>https://balta2ar.github.io/posts/2013-10-13-download-itunes-u-course-the-hacker-way/</link>
+      <pubDate>Sun, 13 Oct 2013 13:48:00 +0300</pubDate>
+      
+      <guid>https://balta2ar.github.io/posts/2013-10-13-download-itunes-u-course-the-hacker-way/</guid>
+      <description>Today, kids, we are going to download iTunes U course almost exclusively from the command line.
+Why The easiest way to do that is to use iTunes to download all that for you. Unfortunately, while I have iPod/iPad in my home ecosystem, I don&amp;rsquo;t have any Mac computers. Thus, I&amp;rsquo;m running iTunes in a virtual machine on Windows. Imagine my user experience from such combination. Pure pain and suffering.</description>
+    </item>
+    
+  </channel>
+</rss>

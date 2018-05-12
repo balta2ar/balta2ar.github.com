@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en-us">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Octopress to rule them all | Mostly Technical</title>
+
+
+<link rel="stylesheet" href="/css/style.css"/></head>
+<body>
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://balta2ar.github.io/"><h1 class="title is-4">Mostly Technical</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"></nav>
+      </div>
+    </nav>
+
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="subtitle is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">October 13, 2013</h2>
+    <h1 class="title">Octopress to rule them all</h1>
+    
+    <div class="content">
+      
+
+<p>It&rsquo;s been a long while since I decided to switch from <a href="http://baltazar-bz.blogspot.ru/">Google Blogspot</a>
+to Octopress and start blogging like a geek. For almost a year I couldn&rsquo;t
+force myself to write even a short post. There were different reasons to that,
+and some of them are technical. Being a complete rookie to Ruby, I was scared
+by all these daunting rake commands and Octopress machinery. It actually helped
+me to write down and summarize the commands that I need in a single place. Now
+I&rsquo;d like them to be a separate post just as a little reminder to myself.</p>
+
+<!-- more -->
+
+<p>What I liked about Octopress immediately is markdown, of course. It wasn&rsquo;t
+nearly convenient to fix an old post in Blogspot as it is in Octopress. You can
+edit Blogspot posts right onsite to make it easier. Not for me. The feature of
+switching modes between compose/HTML didn&rsquo;t help at all. Stop messing with
+HTML in every post was a very attactive feature of Octopress. Besides, having
+a blog in public so that people can send you pull requests is so cool that it
+must be declared illegal.</p>
+
+<p>Anyway, I made my decision and here it goes. I followed carefully <a href="http://octopress.org/docs/">Octopress
+documentation</a>. It wasn&rsquo;t a piece of cake to install
+correct version of Ruby, all necessary bundles, deal with <a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">broken</a>
+<a href="https://github.com/tmm1/pygments.rb/issues/45">pygments</a>, configure my own
+color scheme, and got it up and running eventually. Hopefully, I got through
+all that and now it&rsquo;s time to relax in a serene joy and write one post after
+another like a mad.</p>
+
+<p>To do that, I use the following commands.</p>
+
+<h3 id="1-switch-to-source-branch">1. Switch to source branch</h3>
+
+<pre><code>git checkout source
+</code></pre>
+
+<h3 id="2-activate-rake">2. Activate rake</h3>
+
+<pre><code>source /home/bz/.rvm/scripts/rvm
+rvm use 1.9.3
+</code></pre>
+
+<h3 id="3-setup-environment-for-pygmentize">3. Setup environment for pygmentize</h3>
+
+<p>The problem with pygmentize out of the box is that mentos.py in my version
+calls for <code>/usr/bin/env python</code> which is <code>python3</code> in ArchLinux by default.
+However, <code>python2</code> is required. To fix that, I created virtualenv where
+<code>python2.7</code> is active by default. Activate it before generating the blog:</p>
+
+<pre><code>source ~/.virtualenvs/blog_env/bin/activate
+</code></pre>
+
+<h3 id="4-run-preview-generate-server">4. Run preview/generate server</h3>
+
+<pre><code>jekyll --auto --server --future
+</code></pre>
+
+<p>Other useful commands might be:</p>
+
+<pre><code>rake preview
+rake watch
+</code></pre>
+
+<h3 id="5-create-new-post">5. Create new post</h3>
+
+<pre><code>rake new_post\[&quot;How I spent the summer&quot;\]
+</code></pre>
+
+<h3 id="6-deploy">6. Deploy</h3>
+
+<p>When ready, I usually do <code>rake generate</code> once again (just to be safe),
+commit to the source branch, push and finally deploy. All this happens in the
+source branch of the blog (<code>rake deploy</code> automatically deals with <code>master</code>):</p>
+
+<pre><code>rake generate
+git add .
+git commit -m &quot;New post about the last summer&quot;
+git push
+rake deploy
+</code></pre>
+
+<p>And I got new post upstream in a matter of seconds.</p>
+
+<hr />
+
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+    
+  </div>
+</section>
+
+</body>
+</html>
+
