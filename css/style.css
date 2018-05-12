@@ -5574,7 +5574,7 @@ html {
 .content h5:not(:first-child),
 .content h6:not(:first-child),
 article + article {
-  margin-top: 80px;
+  margin-top: 20px;
 }
 .content {
   font-size: 16px;
