@@ -38,7 +38,7 @@ url = "index.xml"
 [params]
 description = "Mostly technical things"
 footer = "&copy; [Yuri Bochkarev](https://balta2ar.github.io) 2009 -- {Year} | [Github](https://github.com/balta2ar)"
-GithubEdit = "https://github.com/balta2ar/balta2ar.github.com/edit/main/github-edit/content/"
+GithubEdit = "https://github.com/balta2ar/balta2ar.github.com/edit/main/content/"
 
 [markup.highlight]
 codeFences = true
