@@ -1,0 +1,47 @@
+baseURL = 'https://balta2ar.github.io'
+languageCode = 'en-us'
+title = 'Mostly Technical'
+theme = 'hugo-xmin'
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
+footnotereturnlinkcontents = "↩"
+
+[permalinks]
+note = "/note/:year/:month/:day/:slug/"
+post = "/post/:year/:month/:day/:slug/"
+
+[[menu.main]]
+name = "Home"
+url = ""
+weight = 1
+
+[[menu.main]]
+name = "About"
+url = "about/"
+weight = 2
+
+[[menu.main]]
+name = "Categories"
+url = "categories/"
+weight = 3
+
+[[menu.main]]
+name = "Tags"
+url = "tags/"
+weight = 4
+
+[[menu.main]]
+name = "Subscribe"
+url = "index.xml"
+
+[params]
+description = "Mostly technical things"
+footer = "&copy; [Yuri Bochkarev](https://balta2ar.github.io) 2009 -- {Year} | [Github](https://github.com/balta2ar)"
+GithubEdit = "https://github.com/balta2ar/balta2ar.github.com/edit/main/github-edit/content/"
+
+[markup.highlight]
+codeFences = true
+
+[markup.goldmark.renderer]
+unsafe = true
