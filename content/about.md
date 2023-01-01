@@ -1,5 +1,5 @@
 ---
-title: About Yuri Bochkarev
+title: About
 author: Yuri Bochkarev
 ---
 

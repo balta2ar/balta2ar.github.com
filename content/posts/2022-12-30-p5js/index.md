@@ -7,6 +7,8 @@ tags: ["visualization", "p5js", "hugo"]
 
 This is a post where I'm experimenting with integrating p5.js into my blog posts.
 
+Sample javascript code:
+
 ```javascript
 function drawCursor() {
     drawingContext.setLineDash([2, 20])
@@ -15,7 +17,9 @@ function drawCursor() {
     line(mouseX, 0, mouseX, height)
 }
 ```
-and then
+
+Sample python code:
+
 ```python
 from dataclasses import dataclass, field
 from typing import Optional, List, Tuple, Callable
@@ -27,9 +31,9 @@ class Endpoint:
     ix: int
 ```
 
-Visualization of the algorithm:
+Sample visualization using p5.js:
 
 <div class="p5js" id="v1-particles" style="width: 100%; height: 400px;"></div>
 <script src = "v1-particles.js"></script>
 
-Article content goes here.
+More content goes here.
