@@ -2,8 +2,8 @@ let intervals = null
 let tree = null
 let yOff = 0
 let nIntervals = 0
-let sandboxWidth = 0
-let sandboxHeight = 0
+let wWidth = 0
+let wHeight = 0
 const yStep = 5
 
 function Node(b, e) {
@@ -20,26 +20,30 @@ function Endpoint(v, ix) {
     this.ix = ix
 }
 
-function mark(eps, level, s, t, col, yBase, wOffset) {
-    fill(col)
-    stroke(col)
-    rect(eps[s].v+wOffset, yBase+yStep*level, eps[t].v-eps[s].v-wOffset*2, 2)
-}
-
-function markEndpoints(eps) {
-    for (let i = 0; i < eps.length-1; i++) { mark(eps, 0, i, i, cBreak, 10, -1) }
-}
-
 function buildSegmentTree(intervals) {
     let tree = {}
 
-    eps = buildEndpoints(intervals)
-    markEndpoints(eps)
-    // for (let i = 0; i < eps.length-1; i++) { mark(eps, 0, i, i, cBreak, 10, -1) }
+    const cVisited = color(28, 228, 128)
+    const cBuilt = color(128, 128, 128)
+    const cOut = color(28, 128, 228)
+    const cBreak = color(228, 28, 228)
+    mark = (level, s, t, col, yBase, wOffset) => {
+        fill(col)
+        stroke(col)
+        rect(eps[s].v+wOffset, yBase+yStep*level, eps[t].v-eps[s].v-wOffset*2, 2)
+    }
+
+    eps = []
+    for (const [ix, [start, end]] of intervals.entries()) {
+        eps.push(new Endpoint(start, ix))
+        eps.push(new Endpoint(end, ix))
+    }
+    eps.sort((a, b) => a.v - b.v)
+    for (let i = 0; i < eps.length-1; i++) { mark(0, i, i, cBreak, 10, -1) }
 
     _build = (level, s, t) => {
         var v = new Node(s, t)
-        mark(eps, level, s, t, cBuilt, 20, 2)
+        mark(level, s, t, cBuilt, 20, 2)
         if (s+1 == t) { return v }
         const m = Math.floor((s+t)/2)
         v.key = m
@@ -71,9 +75,9 @@ function buildSegmentTree(intervals) {
         numVisited += 1
         var out = new Set()
         if (!v) { return out }
-        mark(eps, level, v.b, v.e, cVisited, 20, 2)
+        mark(level, v.b, v.e, cVisited, 20, 2)
         if ((eps[v.b].v <= q) && (q <= eps[v.e].v)) {
-            if (v.aux.length > 0) { mark(eps, level, v.b, v.e, cOut, 20, 2) }
+            if (v.aux.length > 0) { mark(level, v.b, v.e, cOut, 20, 2) }
             _extend(out, v.aux)
         }
         if (q <= eps[v.key].v) { _extend(out, _query(level+1, v.left, q)) }
@@ -91,8 +95,8 @@ function buildSegmentTree(intervals) {
 function randomIntervals(n) {
     let intervals = [];
     for (let i = 0; i < n; i++) {
-        let start = random(0, sandboxWidth)
-        let end = start + random(0, (sandboxWidth - start) / 2)
+        let start = random(0, wWidth)
+        let end = start + random(0, (wWidth - start) / 2)
         intervals.push([start, end, i])
     }
     return intervals;
@@ -105,30 +109,46 @@ function drawIntervals(intervals, color) {
         stroke(color)
         // line(l, yOff+yStep*ix, r, yOff+yStep*ix)
         rect(l, yOff+yStep*ix, r-l, 2)
-        text(ix, l, yOff+yStep*ix-2)
     }
 }
 
-function setup() {
-    [sandboxWidth, sandboxHeight] = mySetupCanvas()
+function drawCursor() {
+    drawingContext.setLineDash([2, 20])
+    background(255)
+    stroke(color(0, 100, 0))
+    line(mouseX, 0, mouseX, height)
+}
 
+function defaults(divId) {
     frameRate(5)
+    var div = document.getElementById(divId);
+    wWidth = div.offsetWidth
+    wHeight = div.offsetHeight
+    var canvas = createCanvas(wWidth, wHeight);
+    canvas.parent(divId);
     randomSeed(0)
     background(255)
+}
 
-    yOff = 10
-    nIntervals = 10
+function setup() {
+    defaults('v1-intervals')
+    yOff = 100
+    nIntervals = Math.floor((wWidth - yOff) / (yStep)) * 1
     intervals = randomIntervals(nIntervals)
-    cVisited = color(28, 228, 128)
-    cBuilt = color(128, 128, 128)
-    cOut = color(28, 128, 228)
-    cBreak = color(228, 28, 228)
+    // tree = buildSegmentTree(intervals)
+
 }
 
 function draw() {
     drawCursor()
     drawIntervals(intervals, color(0, 0, 0))
-    eps = buildEndpoints(intervals)
-    drawEndpoints(eps)
-    
+    tree = buildSegmentTree(intervals)
+    const [ivs, n] = tree.query(mouseX)
+    drawIntervals(ivs, color(255, 0, 0))
+
+    fill(0)
+    stroke(0)
+    textSize(32)
+    const label = `${n}/${intervals.length}`
+    text(label, 10, wHeight/4)
 }

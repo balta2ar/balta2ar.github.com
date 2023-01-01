@@ -35,7 +35,6 @@ function buildSegmentTree(intervals) {
 
     eps = buildEndpoints(intervals)
     markEndpoints(eps)
-    // for (let i = 0; i < eps.length-1; i++) { mark(eps, 0, i, i, cBreak, 10, -1) }
 
     _build = (level, s, t) => {
         var v = new Node(s, t)
@@ -99,6 +98,7 @@ function randomIntervals(n) {
 }
 
 function drawIntervals(intervals, color) {
+    console.log(`drawIntervals: %o`, intervals)
     drawingContext.setLineDash([10, 0])
     for (const [l, r, ix] of intervals) {
         fill(color)
@@ -115,7 +115,6 @@ function setup() {
     frameRate(5)
     randomSeed(0)
     background(255)
-
     yOff = 10
     nIntervals = 10
     intervals = randomIntervals(nIntervals)
@@ -125,10 +124,22 @@ function setup() {
     cBreak = color(228, 28, 228)
 }
 
+function build(eps, level, s, t) {
+    var v = new Node(s, t)
+    mark(eps, level, s, t, cBuilt, 20, 2)
+    if (s+1 == t) { return v }
+    const m = Math.floor((s+t)/2)
+    v.key = m
+    v.left = build(eps, level+1, s, m)
+    v.right = build(eps, level+1, m, t)
+    return v
+}
+
 function draw() {
     drawCursor()
-    drawIntervals(intervals, color(0, 0, 0))
+    // drawIntervals(intervals, color(0, 0, 0))
     eps = buildEndpoints(intervals)
-    drawEndpoints(eps)
-    
+    // drawEndpoints(eps)
+    let root = build(eps, 0, 0, eps.length-1)
+
 }
