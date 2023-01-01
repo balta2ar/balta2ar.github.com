@@ -1,0 +1,20 @@
+<p>before</p>
+{{- $id := .Get "id" -}}
+{{- $width := .Get "width" -}}
+{{- $height := .Get "height" -}}
+<div class="p5js" id="{{ $id }}" style="width: {{ $width }}; height: {{ $height }};"></div>
+<script src="{{ $id }}.js"></script>
+<script>
+  <!-- window.initCanvas = function(p5, containerId) {
+    var div = document.getElementById(containerId);
+    console.log(div)
+    sandboxWidth = div.offsetWidth
+    sandboxHeight = div.offsetHeight
+    var canvas = p5.createCanvas(sandboxWidth, sandboxHeight);
+    canvas.parent(containerId);
+    return [sandboxWidth, sandboxHeight]
+  } -->
+  sketch.containerId = "{{ $id }}";
+  new p5(sketch, "{{ $id }}");
+</script>
+<p>after</p>
