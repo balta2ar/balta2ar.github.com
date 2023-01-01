@@ -1,6 +1,3 @@
-var sketch = ( p5 ) => {
-var that = this
-
 let intervals = null
 let tree = null
 let yOff = 0
@@ -23,24 +20,10 @@ function Endpoint(v, ix) {
     this.ix = ix
 }
 
-function buildEndpoints(intervals) {
-    eps = []
-    for (const [ix, [start, end]] of intervals.entries()) {
-        eps.push(new Endpoint(start, ix))
-        eps.push(new Endpoint(end, ix))
-    }
-    eps.sort((a, b) => a.v - b.v)
-    return eps
-}
-
-var cVisited
-var cBuilt
-var cOut
-var cBreak
 function mark(eps, level, s, t, col, yBase, wOffset) {
-    p5.fill(col)
-    p5.stroke(col)
-    p5.rect(eps[s].v+wOffset, yBase+yStep*level, eps[t].v-eps[s].v-wOffset*2, 2)
+    fill(col)
+    stroke(col)
+    rect(eps[s].v+wOffset, yBase+yStep*level, eps[t].v-eps[s].v-wOffset*2, 2)
 }
 
 function markEndpoints(eps) {
@@ -107,60 +90,41 @@ function buildSegmentTree(intervals) {
 function randomIntervals(n) {
     let intervals = [];
     for (let i = 0; i < n; i++) {
-        let start = p5.random(0, sandboxWidth)
-        let end = start + p5.random(0, (sandboxWidth - start) / 2)
+        let start = random(0, sandboxWidth)
+        let end = start + random(0, (sandboxWidth - start) / 2)
         intervals.push([start, end, i])
     }
     return intervals;
 }
 
 function drawIntervals(intervals, color) {
-    p5.drawingContext.setLineDash([10, 0])
+    console.log(`drawIntervals: %o`, intervals)
+    drawingContext.setLineDash([10, 0])
     for (const [l, r, ix] of intervals) {
-        p5.fill(color)
-        p5.stroke(color)
+        fill(color)
+        stroke(color)
         // line(l, yOff+yStep*ix, r, yOff+yStep*ix)
-        p5.rect(l, yOff+yStep*ix, r-l, 2)
-        p5.text(ix, l, yOff+yStep*ix-2)
+        rect(l, yOff+yStep*ix, r-l, 2)
+        text(ix, l, yOff+yStep*ix-2)
     }
 }
 
-function drawCursor() {
-    p5.drawingContext.setLineDash([2, 20])
-    p5.background(255)
-    p5.stroke(p5.color(0, 100, 0))
-    p5.line(p5.mouseX, 0, p5.mouseX, p5.height)
-}
+function setup() {
+    [sandboxWidth, sandboxHeight] = mySetupCanvas()
 
-p5.setup = function() {
-    console.log(`containerId: ${that.containerId}`)
-    [sandboxWidth, sandboxHeight] = initCanvas(p5, p5.containerId)
-    
-    p5.frameRate(5)
-    p5.randomSeed(0)
-    p5.background(255)
+    frameRate(5)
+    randomSeed(0)
+    background(255)
     yOff = 10
     nIntervals = 10
     intervals = randomIntervals(nIntervals)
-    cVisited = p5.color(28, 228, 128)
-    cBuilt = p5.color(128, 128, 128)
-    cOut = p5.color(28, 128, 228)
-    cBreak = p5.color(228, 28, 228)
+    cVisited = color(28, 228, 128)
+    cBuilt = color(128, 128, 128)
+    cOut = color(28, 128, 228)
+    cBreak = color(228, 28, 228)
 }
 
-function drawEndpoints(eps) {
-    const wOffset = 2
-    for (let s = 0; s < eps.length-1; s++) { 
-        fill(cBreak)
-        stroke(cBreak)
-        const x = eps[s].v-wOffset
-        const y = nIntervals*yStep+10
-        rect(x, y, 2, 30)
-        text(eps[s].ix, x+4, y+30)
-    }
-}
-
-build = (eps, level, s, t) => {
+function build(eps, level, s, t) {
     var v = new Node(s, t)
     mark(eps, level, s, t, cBuilt, 20, 2)
     if (s+1 == t) { return v }
@@ -171,13 +135,11 @@ build = (eps, level, s, t) => {
     return v
 }
 
-p5.draw = function() {
+function draw() {
     drawCursor()
-    drawIntervals(intervals, p5.color(0, 0, 0))
+    // drawIntervals(intervals, color(0, 0, 0))
     eps = buildEndpoints(intervals)
     // drawEndpoints(eps)
     let root = build(eps, 0, 0, eps.length-1)
-
-}
 
 }

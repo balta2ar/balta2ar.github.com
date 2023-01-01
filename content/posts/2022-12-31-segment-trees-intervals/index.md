@@ -35,8 +35,7 @@ function randomIntervals(n) {
 
 and they look like this:
 
-<div class="p5js" id="v1-intervals" style="width: 100%; height: 100px;"></div>
-<script src = "v1-intervals.js"></script>
+{{< p5js id="v1-intervals" width="100%" height="100px" >}}
 
 Instead of working directly with $n$ float coordinates, we'll convert intervals to
 an array of $N = 2n$ endpoints, which we will also sort by their value. On the picture
@@ -72,42 +71,18 @@ function Node(b, e) {
     this.key = 0
     this.aux = []
 }
+function build(eps, level, s, t) {
+    var v = new Node(s, t)
+    mark(eps, level, s, t, cBuilt, 20, 2)
+    if (s+1 == t) { return v }
+    const m = Math.floor((s+t)/2)
+    v.key = m
+    v.left = build(eps, level+1, s, m)
+    v.right = build(eps, level+1, m, t)
+    return v
+}
 ```
-
-More
 
 {{< p5js id="v2-build" width="100%" height="100px" >}}
 
-Note that
-
-2 Note that
-
-3 Note that
-
-<!-- 
-```javascript
-function drawCursor() {
-    drawingContext.setLineDash([2, 20])
-    background(255)
-    stroke(color(0, 100, 0))
-    line(mouseX, 0, mouseX, height)
-}
-```
-and then
-```python
-from dataclasses import dataclass, field
-from typing import Optional, List, Tuple, Callable
-from math import floor
-
-@dataclass
-class Endpoint:
-    v: float
-    ix: int
-```
-
-Visualization of the algorithm:
-
-<div class="p5js" id="v1-intervals" style="width: 100%; height: 400px;"></div>
-<script src = "v1-intervals.js"></script>
-
-Article content goes here. -->
+More content

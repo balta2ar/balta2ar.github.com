@@ -1,11 +1,9 @@
-var sketch = ( sandbox ) => {
-
 let intervals = null
 let tree = null
 let yOff = 0
 let nIntervals = 0
-let wWidth = 0
-let wHeight = 0
+let sandboxWidth = 0
+let sandboxHeight = 0
 const yStep = 5
 
 function Node(b, e) {
@@ -22,20 +20,6 @@ function Endpoint(v, ix) {
     this.ix = ix
 }
 
-function buildEndpoints(intervals) {
-    eps = []
-    for (const [ix, [start, end]] of intervals.entries()) {
-        eps.push(new Endpoint(start, ix))
-        eps.push(new Endpoint(end, ix))
-    }
-    eps.sort((a, b) => a.v - b.v)
-    return eps
-}
-
-var cVisited
-var cBuilt
-var cOut
-var cBreak
 function mark(eps, level, s, t, col, yBase, wOffset) {
     fill(col)
     stroke(col)
@@ -107,8 +91,8 @@ function buildSegmentTree(intervals) {
 function randomIntervals(n) {
     let intervals = [];
     for (let i = 0; i < n; i++) {
-        let start = random(0, wWidth)
-        let end = start + random(0, (wWidth - start) / 2)
+        let start = random(0, sandboxWidth)
+        let end = start + random(0, (sandboxWidth - start) / 2)
         intervals.push([start, end, i])
     }
     return intervals;
@@ -125,26 +109,13 @@ function drawIntervals(intervals, color) {
     }
 }
 
-function drawCursor() {
-    drawingContext.setLineDash([2, 20])
-    background(255)
-    stroke(color(0, 100, 0))
-    line(mouseX, 0, mouseX, height)
-}
+function setup() {
+    [sandboxWidth, sandboxHeight] = mySetupCanvas()
 
-function defaults(divId) {
     frameRate(5)
-    var div = document.getElementById(divId);
-    wWidth = div.offsetWidth
-    wHeight = div.offsetHeight
-    var canvas = createCanvas(wWidth, wHeight);
-    canvas.parent(divId);
     randomSeed(0)
     background(255)
-}
 
-sandbox.setup = function() {
-    // defaults('v1-intervals')
     yOff = 10
     nIntervals = 10
     intervals = randomIntervals(nIntervals)
@@ -154,19 +125,10 @@ sandbox.setup = function() {
     cBreak = color(228, 28, 228)
 }
 
-sandbox.draw = function() {
+function draw() {
     drawCursor()
     drawIntervals(intervals, color(0, 0, 0))
     eps = buildEndpoints(intervals)
-    const wOffset = 2
-    for (let s = 0; s < eps.length-1; s++) { 
-        fill(cBreak)
-        stroke(cBreak)
-        const x = eps[s].v-wOffset
-        const y = nIntervals*yStep+10
-        rect(x, y, 2, 30)
-        text(eps[s].ix, x+4, y+30)
-    }
-}
-
+    drawEndpoints(eps)
+    
 }
