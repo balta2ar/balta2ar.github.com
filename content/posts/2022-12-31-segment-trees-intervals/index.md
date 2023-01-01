@@ -30,6 +30,6 @@ class Endpoint:
 Visualization of the algorithm:
 
 <div class="p5js" id="v1-intervals" style="width: 100%; height: 400px;"></div>
-<script src = "/js/2022-12-31-v1-intervals.js"></script>
+<script src = "v1-intervals.js"></script>
 
 Article content goes here.

@@ -30,6 +30,6 @@ class Endpoint:
 Visualization of the algorithm:
 
 <div class="p5js" id="v1-particles" style="width: 100%; height: 400px;"></div>
-<script src = "/js/2022-12-30-v1-particles.js"></script>
+<script src = "v1-particles.js"></script>
 
 Article content goes here.
