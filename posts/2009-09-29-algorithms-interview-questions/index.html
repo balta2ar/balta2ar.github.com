@@ -1,0 +1,144 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Вопросы на собеседовании из курса Algorithms | Mostly Technical</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css></head><body><nav><ul class=menu><li><a href=/>Home</a></li><li><a href=/about/>About</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li><li><a href=/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>Вопросы на собеседовании из курса Algorithms</span></h1><h2 class=date>2009/09/29</h2><p class=terms>Tags: <a href=/tags/algorithms>algorithms</a> <a href=/tags/data-structures>data structures</a> <a href=/tags/interview>interview</a></p></div><main><h1 id=вопросы-на-собеседовании-из-курса-algorithms>Вопросы на собеседовании из курса Algorithms</h1><p>Заканчивается первая часть курса Algorithms на coursera.org. Это был один
+из немногих курсов, в котором мне понравилось абсолютно всё: прекрасная
+подача материала (лектор — сам Седжвик), наглядные слайды, наличие
+сопутствующей курсу книги, из которой можно почерпнуть больше подробностей
+по теме, нетривиальные домашние задания и, наконец, вопросы для интервью.</p><p>Я первый раз вижу, чтобы в курсе давали примеры таких вопросов. Это
+отличное подспорье для подготовки к собеседованиям, и поэтому я хочу
+поделиться ими здесь.</p><h2 id=union-find>Union-Find</h2><h3 id=question-1-social-network-connectivity>Question 1 Social network connectivity</h3><p>Given a social network containing N members and a log file containing M
+timestamps at which times pairs of members formed friendships, design an
+algorithm to determine the earliest time at which all members are
+connected (i.e., every member is a friend of a friend of a friend … of a
+friend). Assume that the log file is sorted by timestamp and that
+friendship is an equivalence relation. The running time of your algorithm
+should be MlogN or better and use extra space proportional to N.</p><p>Hint: union-find.</p><h3 id=question-2-union-find-with-specific-canonical-element>Question 2 Union-find with specific canonical element</h3><p>Add a method find() to the union-find data type so that find(i) returns
+the largest element in the connected component containing i. The
+operations, union(), connected(), and find() should all take logarithmic
+time or better.</p><p>For example, if one of the connected components is {1,2,6,9}, then the
+find() method should return 9 for each of the four elements in the
+connected components.</p><p>Hint: maintain an extra array to the weighted quick-union data structure
+that stores for each root i the large element in the connected component
+containing i.</p><h3 id=question-3-successor-with-delete>Question 3 Successor with delete</h3><p>Given a set of N integers S={0,1,&mldr;,N−1} and a sequence of requests of
+the following form:</p><ul><li>Remove x from S</li><li>Find the successor of x: the smallest y in S such that y ≥ x.</li></ul><p>design a data type so that all operations (except construction) should
+take logarithmic time or better.</p><p>Hint: use the modification of the union-find data discussed in the
+previous question.</p><h3 id=question-4-union-by-size>Question 4 Union-by-size</h3><p>Develop a union-find implementation that uses the same basic strategy as
+weighted quick-union but keeps track of tree height and always links the
+shorter tree to the taller one. Prove a lgN upper bound on the height of
+the trees for N sites with your algorithm.</p><p>Hint: replace the sz[] array with a ht[] array such that ht[i] stores the
+height of the subtree rooted at i.</p><h2 id=analysis-of-algorithms>Analysis of Algorithms</h2><h3 id=question-1-3-sum-in-quadratic-time>Question 1 3-SUM in quadratic time</h3><p>Design an algorithm for the 3-SUM problem that takes time proportional to
+N² in the worst case. You may assume that you can sort the N integers in
+time proportional to N² or better.</p><p>[ ] Hint</p><p>given an integer x and a sorted array a[] of N distinct integers, design a
+linear-time algorithm to determine if there exists two distinct indices i
+and j such that a[i] + a[j] == x.</p><h3 id=question-2-search-in-a-bitonic-array>Question 2 Search in a bitonic array</h3><p>An array is bitonic if it is comprised of an increasing sequence of
+integers followed immediately by a decreasing sequence of integers. Write
+a program that, given a bitonic array of N distinct integer values,
+determines whether a given integer is in the array. Standard version: Use
+∼3lgN compares in the worst case. Signing bonus: Use ∼2lgN compares in the
+worst case (and prove that no algorithm can guarantee to perform fewer
+than ∼2lgN compares in the worst case).</p><p>Hints: Standard version. First, find the maximum integer using ∼1lgN
+compares — this divides the array into the increasing and decreasing
+pieces. Signing bonus. Do it without finding the maximum integer.</p><h3 id=question-3-egg-drop>Question 3 Egg drop</h3><p>Suppose that you have an N-story building and plenty of eggs. An egg
+breaks if it is dropped from floor T or higher and does not break
+otherwise. Your goal is to devise a strategy to determine the value of T
+given the following limitations on the number of eggs and tosses:</p><ul><li>Version 0: 1 egg, ≤ T tosses.</li><li>Version 1: ∼1lgN eggs and ∼1lgN tosses.</li><li>Version 2: ∼lgT eggs and ∼2lgT tosses.</li><li>Version 3: 2 eggs and ∼2 sqrt(N) tosses.</li><li>Version 4: 2 eggs and ≤ c sqrt(T) tosses for some fixed constant c.</li></ul><p>Hints:</p><ul><li>Version 0: sequential search.</li><li>Version 1: binary search.</li><li>Version 2: find an interval containing T of size ≤2T, then do binary
+search.</li><li>Version 3: find an interval of size sqrt(N), then do sequential
+search.</li></ul><p>Note: can be improved to ∼sqrt(2N) tosses.</p><ul><li>Version 4: 1 + 2 + 3 + &mldr; + t ∼ 1/2 t². Aim for c = 2 sqrt(2).</li></ul><h2 id=stacks-and-queues>Stacks and Queues</h2><h3 id=question-1-queue-with-two-stacks>Question 1 Queue with two stacks</h3><p>Implement a queue with two stacks so that each queue operations takes a
+constant amortized number of stack operations.</p><p>Hint: If you push elements onto a stack and then pop them all, they appear
+in reverse order. If you repeat this process, they are now back in order.</p><h3 id=question-2-stack-with-max>Question 2 Stack with max</h3><p>Create a data structure that efficiently supports the stack operations
+(push and pop) and also a return-the-maximum operation. Assume the
+elements are reals numbers so that you can compare them.</p><p>Hint: Use two stacks, one to store all of the items and a second stack to
+store the maximums.</p><h3 id=question-3-java-generics>Question 3 Java generics</h3><p>Explain why Java prohibits generic array creation.</p><p>Hint: to start, you need to understand that Java arrays are covariant but
+Java generics are not: that is, <code>String[]</code> is a subtype of <code>Object[]</code>, but
+<code>Stack&lt;String></code> is not a subtype of <code>Stack&lt;Object></code>.</p><h3 id=question-4-detect-cycle-in-a-linked-list>Question 4 Detect cycle in a linked list</h3><p>A singly-linked data structure is a data structure made up of nodes where
+each node has a pointer to the next node (or a pointer to null). Suppose
+that you have a pointer to the first node of a singly-linked list data
+structure:</p><ul><li>Determine whether a singly-linked data structure contains a cycle. You
+may use only two pointers into the list (and no other variables). The
+running time of your algorithm should be linear in the number of nodes
+in the data structure.</li><li>If a singly-linked data structure contains a cycle, determine the
+first node that participates in the cycle. you may use only a constant
+number of pointers into the list (and no other variables). The running
+time of your algorithm should be linear in the number of nodes in the
+data structure.</li></ul><p>You may not modify the structure of the linked list.</p><p>Hint: maintain a tortoise pointer that advances one node per time step and
+a hare pointer that advances two nodes per time step.</p><h3 id=question-5-clone-a-linked-structure-with-two-pointers-per-node>Question 5 Clone a linked structure with two pointers per node</h3><p>Suppose that you are given a reference to the first node of a linked
+structure where each node has two pointers: one pointer to the next node
+in the sequence (as in a standard singly-linked list) and one pointer to
+an arbitrary node.</p><p>Design a linear-time algorithm to create a copy of the doubly-linked
+structure. You may modify the original linked structure, but you must end
+up with two copies of the original.</p><p>Hint: begin by inserting a new node x′ into the linked list immediately
+after each original node x.</p><h2 id=elementary-sorts>Elementary Sorts</h2><h3 id=question-1-intersection-of-two-sets>Question 1 Intersection of two sets</h3><p>Given two arrays a[] and b[], each containing N distinct points in the
+plane, design a subquadratic algorithm to determine how many points are
+contained in both arrays.</p><p>Hint: shellsort.</p><h3 id=question-2-permutation>Question 2 Permutation</h3><p>Given two integer arrays of size N, design a subquadratic algorithm to
+determine whether one is a permutation of the other. That is, do they
+contain exactly the same entries but, possibly, in a different order.</p><p>Hint: sort both arrays.</p><h3 id=question-3-dutch-national-flag>Question 3 Dutch national flag</h3><p>Given an array of N buckets, each containing a red, white, or blue pebble,
+sort them by color. The allowed operations are:</p><ul><li>swap(i,j): swap the pebble in bucket i with the pebble in bucket j.</li><li>color(i): color of pebble in bucket i.</li></ul><p>The performance requirements are as follows:</p><ul><li>At most N calls to color().</li><li>At most N calls to swap().</li><li>Constant extra space.</li></ul><h2 id=mergesort>Mergesort</h2><h3 id=question-1-merging-with-smaller-auxiliary-array>Question 1 Merging with smaller auxiliary array</h3><p>Suppose that the subarray a[0] to a[N-1] is sorted and the subarray a[N]
+to a[2 * N-1] is sorted. How can you merge the two subarrays so that a[0]
+to a[2 * N-1] is sorted using an auxiliary array of size N (instead of
+2N)?</p><p>Hint: copy only the left half into the auxiliary array.</p><h3 id=question-2-counting-inversions>Question 2 Counting inversions</h3><p>An inversion in an array a[] is a pair of entries a[i] and a[j] such that
+i &lt; j but a[i] > a[j]. Given an array, design a linearithmic algorithm to
+count the number of inversions.</p><p>Hint: count while mergesorting.</p><h3 id=question-3-shuffling-a-linked-list>Question 3 Shuffling a linked list</h3><p>Given a singly-linked list containing N items, rearrange the items
+uniformly at random. Your algorithm should consume a logarithmic (or
+constant) amount of extra memory and run in time proportional to NlogN in
+the worst case.</p><p>Hint: design a linear-time subroutine that can take two uniformly shuffled
+linked lists of sizes N₁ and N₂ and combined them into a uniformly
+shuffled linked lists of size N₁ + N₂.</p><h2 id=quicksort>Quicksort</h2><h3 id=question-1-nuts-and-bolts>Question 1 Nuts and bolts</h3><p>A disorganized carpenter has a mixed pile of N nuts and N bolts. The goal
+is to find the corresponding pairs of nuts and bolts. Each nut fits
+exactly one bolt and each bolt fits exactly one nut. By fitting a nut and
+a bolt together, the carpenter can see which one is bigger (but the
+carpenter cannot compare two nuts or two bolts directly). Design an
+algorithm for the problem that uses NlogN compares (probabilistically).</p><p>Hint: modify the quicksort partitioning part of quicksort.</p><p>Remark: This research paper gives an algorithm that runs in N log⁴ N time
+in the worst case.</p><h3 id=question-2-selection-in-two-sorted-arrays>Question 2 Selection in two sorted arrays</h3><p>Given two sorted arrays a[] and b[], of sizes N₁ and N₂, respectively,
+design an algorithm to find the kth largest key. The order of growth of
+the worst case running time of your algorithm should be logN, where N = N₁ + N₂.</p><ul><li>Version 1: N₁ = N₂ and k = N/2</li><li>Version 2: k = N/2</li><li>Version 3: no restrictions</li></ul><p>Hints: there are two basic approaches.</p><ul><li>Approach A: Compute the median in a[] and the median in b[]. Recur in
+a subproblem of roughly half the size.</li><li>Approach B: Design a constant-time algorithm to determine whether a[i]
+is the k-th largest key. Use this subroutine and binary search.</li></ul><p>Dealing with corner cases can be tricky.</p><h3 id=question-3-decimal-dominants>Question 3 Decimal dominants</h3><p>Given an array with N keys, design an algorithm to find all values that
+occur more than N/10 times. The expected running time of your algorithm
+should be linear.</p><p>Hint: determine the (N/10)-th largest key using quickselect and check if
+it occurs more than N/10 times.</p><p>Alternate solution hint: use 9 counters.</p><h2 id=priority-queues>Priority Queues</h2><h3 id=question-1-dynamic-median>Question 1 Dynamic median</h3><p>Design a data type that supports insert in logarithmic time,
+find-the-median in constant time, and remove-the-median in logarithmic
+time.</p><p>Hint: maintain two binary heaps, one that is max-oriented and one that is
+min-oriented.</p><h3 id=question-2-randomized-priority-queue>Question 2 Randomized priority queue</h3><p>Describe how to add the methods sample() and delRandom() to our binary
+heap implementation. The two methods return a key that is chosen uniformly
+at random among the remaining keys, with the latter method also removing
+that key. The sample() method should take constant time; the delRandom()
+method should take logarithmic time. Do not worry about resizing the
+underlying array.</p><h3 id=question-3-taxicab-numbers>Question 3 Taxicab numbers</h3><p>A taxicab number is an integer that can be expressed as the sum of two
+cubes of integers in two different ways: a³ + b³ = c³ + d³. For example,
+1729 = 9³ + 10³ = 1³ + 12³.</p><p>Design an algorithm to find all taxicab numbers with a, b, c, and d less
+than N.</p><ul><li>Version 1: Use time proportional to N² logN and space proportional to
+N².</li><li>Version 2: Use time proportional to N² logN and space proportional to
+N.</li></ul><p>Hints:</p><ul><li>Version 1: Form the sums a³ + b³ and sort.</li><li>Version 2: Use a min-oriented priority queue with N items.</li></ul><h2 id=elementary-symbol-tables>Elementary Symbol Tables</h2><h3 id=question-1-java-autoboxing-and-equals>Question 1 Java autoboxing and equals()</h3><p>Consider two double values a and b and their corresponding Double values x
+and y.</p><ul><li>Find values such that (a == b) is true but x.equals(y) is false.</li><li>Find values such that (a == b) is false but x.equals(y) is true.</li></ul><p>Hint: IEEE floating point arithmetic has some peculiar rules for 0.0,
+-0.0, and NaN. Java requires that equals() implements an equivalence
+relation.</p><h3 id=question-2-check-if-a-binary-tree-is-a-bst>Question 2 Check if a binary tree is a BST</h3><p>Given a binary tree where each Node contains a key, determine whether it
+is a binary search tree. Use extra space proportional to the height of the
+tree.</p><p>Hint: design a recursive function isBST(Node x, Key min, Key max) that
+determines whether x is the root of a binary search tree with all keys
+between min and max.</p><h3 id=question-3-inorder-traversal-with-constant-extra-space>Question 3 Inorder traversal with constant extra space</h3><p>Design an algorithm to perform an inorder traversal of a binary search
+tree using only a constant amount of extra space.</p><p>Hint: you may modify the BST during the traversal provided you restore it
+upon completion.</p><h3 id=question-4-web-tracking>Question 4 Web tracking</h3><p>Suppose that you are tracking N web sites and M users and you want to
+support the following API:</p><ul><li>User visits a website.</li><li>How many times has a given user visited a given site?</li></ul><p>What data structure or data structures would you use?</p><p>Hint: maintain a symbol table of symbol tables.</p><h2 id=balanced-search-trees>Balanced Search Trees</h2><h3 id=question-1-red-black-bst-with-no-extra-memory>Question 1 Red-black BST with no extra memory</h3><p>Describe how to save the memory for storing the color information when
+implementing a red-black BST.</p><p>Hint: modify the structure of the BST to encode the color information.</p><h3 id=question-2-document-search>Question 2 Document search</h3><p>Design an algorithm that takes a sequence of N document words and a
+sequence of M query words and find the shortest interval in which the M
+query words appear in the document in the order given. The length of an
+interval is the number of words in that interval.</p><p>Hint: for each word, maintain a sorted list of the indices in the document
+in which that word appears. Scan through the sorted lists of the query
+words in a judicious manner.</p><h3 id=question-3-generalized-queue>Question 3 Generalized queue</h3><p>Design a generalized queue data type that supports all of the following
+operations in logarithmic time (or better) in the worst case.</p><ul><li>Create an empty data structure.</li><li>Append an item to the end of the queue.</li><li>Remove an item from the front of the queue.</li><li>Return the i-th item in the queue.</li><li>Remove the i-th item from the queue.</li></ul><p>Hint: create a red-black BST where the keys are integers and the values
+are the items such that the i^th largest integer key in the red-black BST
+corresponds to the i-th item in the queue.</p><h2 id=geometric-applications-of-bsts>Geometric Applications of BSTs</h2><h3 id=question-1-stabbing-count-queries>Question 1 Stabbing count queries</h3><p>Suppose that you have a huge log file containing the entry and exit time
+for each of the N people that entered and exited a building on a given
+day. Design a data type that returns the number of people in the building
+at any given query time. Each query should take logarithmic time or better
+as a function of N.</p><p>Hint: you can interpret each log entry as an interval whose left endpoint
+is the entry time and whose right endpoint is the exit time. Put the left
+endpoints in one data structure and the right endpoints in another data
+structure. Use the rank() method.</p><h2 id=hash-tables>Hash Tables</h2><h3 id=question-1-4-sum>Question 1 4-SUM</h3><p>Given an array a[] of N integers, the 4-SUM problem is to determine if
+there exist distinct indices i, j, k, and l such that a[i] + a[j] = a[k] +
+a[l]. Design an algorithm for the 4-SUM problem that takes time
+proportional to N² (under suitable technical assumptions).</p><p>Hint: create a hash table with (N/2) (binome) key-value pairs.</p><h3 id=question-2-hashing-with-wrong-hashcode-or-equals>Question 2 Hashing with wrong hashCode() or equals()</h3><p>Suppose that you implement a data type OlympicAthlete for use in a
+java.util.HashMap.</p><ul><li>Describe what happens if you override hashCode() but not equals().</li><li>Describe what happens if you override equals() but not hashCode().</li><li>Describe what happens if you override hashCode() but implement public
+boolean equals(OlympicAthlete that) instead of public boolean
+equals(Object that).</li></ul><p>Hint: it is code — try it and see!</p></main><footer><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js></script>
+<script>hljs.configure({languages:[]}),hljs.highlightAll()</script><hr>© <a href=https://balta2ar.github.io>Yuri Bochkarev</a> 2009 &ndash; 2023 | <a href=https://github.com/balta2ar>Github</a>
+| <a href=https://github.com/balta2ar/balta2ar.github.com/edit/main/content/posts/2009-09-29-algorithms-interview-questions.md>Edit this page</a></footer></body></html>
