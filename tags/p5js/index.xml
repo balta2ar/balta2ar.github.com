@@ -2,6 +2,7 @@
 function drawCursor() { drawingContext.setLineDash([2, 20]) background(255) stroke(color(0, 100, 0)) line(mouseX, 0, mouseX, height) } and then
 from dataclasses import dataclass, field from typing import Optional, List, Tuple, Callable from math import floor @dataclass class Endpoint: v: float ix: int Visualization of the algorithm:
 Article content goes here.</description></item><item><title>Using p5.js in Hugo blog posts</title><link>https://balta2ar.github.io/posts/2022-12-30-p5js/</link><pubDate>Fri, 30 Dec 2022 12:03:18 +0100</pubDate><guid>https://balta2ar.github.io/posts/2022-12-30-p5js/</guid><description>This is a post where I&amp;rsquo;m experimenting with integrating p5.js into my blog posts.
-function drawCursor() { drawingContext.setLineDash([2, 20]) background(255) stroke(color(0, 100, 0)) line(mouseX, 0, mouseX, height) } and then
-from dataclasses import dataclass, field from typing import Optional, List, Tuple, Callable from math import floor @dataclass class Endpoint: v: float ix: int Visualization of the algorithm:
-Article content goes here.</description></item></channel></rss>
+Sample javascript code:
+function drawCursor() { drawingContext.setLineDash([2, 20]) background(255) stroke(color(0, 100, 0)) line(mouseX, 0, mouseX, height) } Sample python code:
+from dataclasses import dataclass, field from typing import Optional, List, Tuple, Callable from math import floor @dataclass class Endpoint: v: float ix: int Sample visualization using p5.js:
+More content goes here.</description></item></channel></rss>
