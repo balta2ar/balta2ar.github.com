@@ -4,6 +4,7 @@
   <hr/>
   {{ replace . "{Year}" now.Year | markdownify}}
   {{ end }}
+  {{ if .Params.math }}{{ partial "helpers/katex.html" . }}{{ end }}
   {{ if .File.Path }}
     {{ $.Scratch.Set "FilePath" .File.Path }}
     {{ $RmdFile := (print .File.BaseFileName ".md") }}

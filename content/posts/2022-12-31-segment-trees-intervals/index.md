@@ -3,6 +3,7 @@ title: "Segment Trees for overlapping intervals"
 date: 2022-12-31T16:03:18+01:00
 draft: false
 tags: ["algorithms", "data structures", "segment trees", "p5js"]
+math: true
 ---
 
 Today we're gonna look into how to use segment trees to effeciently find intervals
