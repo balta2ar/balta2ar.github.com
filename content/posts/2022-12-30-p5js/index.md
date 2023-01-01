@@ -33,7 +33,6 @@ class Endpoint:
 
 Sample visualization using p5.js:
 
-<div class="p5js" id="v1-particles" style="width: 100%; height: 400px;"></div>
-<script src = "v1-particles.js"></script>
+{{< p5js id="v1-particles" width="100%" height="400px" >}}
 
 More content goes here.

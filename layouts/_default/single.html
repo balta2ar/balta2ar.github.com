@@ -12,6 +12,10 @@
 </p>
 </div>
 
+{{ if .Params.toc }}
+{{ .TableOfContents }}
+{{ end }}
+
 <main>
 {{ .Content }}
 </main>
