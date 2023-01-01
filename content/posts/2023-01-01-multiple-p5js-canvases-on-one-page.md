@@ -2,7 +2,7 @@
 title: "Multiple p5js Canvases on One Page"
 date: 2023-01-01T20:37:14+01:00
 draft: false
-tags: ["algorithms", "data structures", "segment trees", "p5js"]
+tags: ["hugo", "p5js", "canvas"]
 toc: true
 ---
 
