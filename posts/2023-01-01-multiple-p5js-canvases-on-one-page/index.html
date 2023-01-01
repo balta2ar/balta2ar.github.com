@@ -1,0 +1,67 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Multiple p5js Canvases on One Page | Mostly Technical</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css></head><body><nav><ul class=menu><li><a href=/>Home</a></li><li><a href=/about/>About</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li><li><a href=/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>Multiple p5js Canvases on One Page</span></h1><h2 class=date>2023/01/01</h2><p class=terms>Tags: <a href=/tags/algorithms>algorithms</a> <a href=/tags/data-structures>data structures</a> <a href=/tags/segment-trees>segment trees</a> <a href=/tags/p5js>p5js</a></p></div><nav id=TableOfContents><ul><li><ul><li><a href=#two-modes-of-p5js>Two modes of p5js</a></li><li><a href=#my-solution>My solution</a></li><li><a href=#further-work>Further work</a></li></ul></li></ul></nav><main><p>It was fairly easy to set up integration of p5js into my blog posts if I
+needed only one canvas per post. Having multiple canvases turned out to be
+a bit more complicated. Since I spent several hours setting it up, I can
+as well write a post about it.</p><h3 id=two-modes-of-p5js>Two modes of p5js</h3><p>It turns out there are two modes that p5 can work with: global and instance.
+Read more here: <a href=https://github.com/processing/p5.js/wiki/p5.js-overview#instantiation--namespace>https://github.com/processing/p5.js/wiki/p5.js-overview#instantiation--namespace</a></p><p>In global mode you define <code>setup()</code> and <code>draw()</code> like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>400</span>, <span style=color:#ae81ff>400</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>draw</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>220</span>);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>In instance mode you need to wrap your code in a closure:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>s</span> <span style=color:#f92672>=</span> ( <span style=color:#a6e22e>p</span> ) =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>setup</span> <span style=color:#f92672>=</span> () =&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>400</span>, <span style=color:#ae81ff>400</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>draw</span> <span style=color:#f92672>=</span> () =&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>220</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span><span style=color:#66d9ef>new</span> <span style=color:#a6e22e>p5</span>(<span style=color:#a6e22e>s</span>, <span style=color:#e6db74>&#39;container-id&#39;</span>);
+</span></span></code></pre></div><p>This nuance with wrapping your code in a closure is not how I wanted my js
+patches to look like, thus I went for global mode. The challenge was that
+in that case we gotta resort to iframes.</p><h3 id=my-solution>My solution</h3><p>To make it more manageable and avoid code duplication, I had to create the
+following:</p><ol><li>A shortcode in <code>layouts/shortcode/p5js.html</code> that would create an iframe with a given id and src:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>{{- $id := .Get &#34;id&#34; -}}
+</span></span><span style=display:flex><span>{{- $width := .Get &#34;width&#34; -}}
+</span></span><span style=display:flex><span>{{- $height := .Get &#34;height&#34; -}}
+</span></span><span style=display:flex><span>{{- $dir := printf &#34;content/%s&#34; .Page.File.Dir | printf &#34;%s&#34; -}}
+</span></span><span style=display:flex><span>&lt;iframe srcdoc=&#39;
+</span></span><span style=display:flex><span>&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js&#34;&gt;&lt;/script&gt;
+</span></span><span style=display:flex><span>&lt;script src=&#34;/js/p5js-global.js&#34;&gt;&lt;/script&gt;
+</span></span><span style=display:flex><span>{{ if (where (readDir $dir) &#34;Name&#34; &#34;page.js&#34;) }}
+</span></span><span style=display:flex><span>&lt;script src=&#34;page.js&#34;&gt;&lt;/script&gt;
+</span></span><span style=display:flex><span>{{ end }}
+</span></span><span style=display:flex><span>&lt;div class=&#34;p5js&#34; id=&#34;p5js-container&#34; style=&#34;width: {{ $width }}; height: {{ $height }};&#34;&gt;&lt;/div&gt;
+</span></span><span style=display:flex><span>&lt;script src=&#34;{{ $id }}.js&#34;&gt;&lt;/script&gt;
+</span></span><span style=display:flex><span>&#39; id=&#34;iframe-{{ $id }}&#34; style=&#34;width: {{ $width }}; height: {{ $height }}; overflow: hidden;&#34;  scrolling=&#34;no&#34; frameborder=&#34;0&#34;&gt;
+</span></span><span style=display:flex><span>  &lt;p&gt;Your browser does not support iframes.&lt;/p&gt;
+</span></span><span style=display:flex><span>&lt;/iframe&gt;
+</span></span></code></pre></div><ol start=2><li>A global js file <code>static/js/p5js-global.js</code> that contains canvas setup code:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>mySetupCanvas</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>divId</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;p5js-container&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>div</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#a6e22e>divId</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sandboxWidth</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>div</span>.<span style=color:#a6e22e>offsetWidth</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sandboxHeight</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>div</span>.<span style=color:#a6e22e>offsetHeight</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>canvas</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createCanvas</span>(<span style=color:#a6e22e>sandboxWidth</span>, <span style=color:#a6e22e>sandboxHeight</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>parent</span>(<span style=color:#a6e22e>divId</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [<span style=color:#a6e22e>sandboxWidth</span>, <span style=color:#a6e22e>sandboxHeight</span>]
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>If I want to share code between different p5 snippets, I create a <code>page.js</code> file
+in the same folder as the post. This file is included in the iframe if it exists,
+for example:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>drawCursor</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>drawingContext</span>.<span style=color:#a6e22e>setLineDash</span>([<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>20</span>])
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>255</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>stroke</span>(<span style=color:#a6e22e>color</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>0</span>))
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>line</span>(<span style=color:#a6e22e>mouseX</span>, <span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>mouseX</span>, <span style=color:#a6e22e>height</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=4><li>In the post I use the shortcode like this:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>\{\{&lt; p5js id=&#34;v1-particles&#34; width=&#34;100%&#34; height=&#34;400px&#34; &gt;}}
+</span></span></code></pre></div><ol start=5><li>I create a <code>v1-particles.js</code> file in the same folder as the post.
+This file contains the code for the p5 sketch. The minimal necessary boilerplate
+initialization code is:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mySetupCanvas</span>()
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>draw</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>220</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=further-work>Further work</h3><p>It would interesting to try the following:</p><ol><li>Implement inline mode so that I don&rsquo;t have to create a separate file for
+each p5 sketch.</li><li>Implement integration with d3.js.</li><li>Try Observable: <a href=https://quarto.org/docs/computations/ojs.html>https://quarto.org/docs/computations/ojs.html</a></li><li>Maybe try pyscript: <a href=https://pyscript.net/examples/>https://pyscript.net/examples/</a></li></ol></main><footer><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
+<script>hljs.configure({languages:[]}),hljs.highlightAll()</script><hr>© <a href=https://balta2ar.github.io>Yuri Bochkarev</a> 2009 &ndash; 2023 | <a href=https://github.com/balta2ar>Github</a>
+| <a href=https://github.com/balta2ar/balta2ar.github.com/edit/main/content/posts/2023-01-01-multiple-p5js-canvases-on-one-page.md>Edit this page</a></footer></body></html>

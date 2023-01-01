@@ -53,10 +53,7 @@ function draw() {
 }
 
 function setup() {
-    var divId = 'v1-particles'
-    var div = document.getElementById(divId);
-    var canvas = createCanvas(div.offsetWidth, div.offsetHeight);
-    canvas.parent(divId);
+    mySetupCanvas()
 
     for (let i = 0; i < width / 10; i++) {
         particles.push(new Particle());
