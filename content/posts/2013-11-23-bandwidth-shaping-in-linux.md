@@ -2,7 +2,7 @@
 title: "Bandwidth shaping in Linux"
 date: 2013-11-23T17:01:00
 draft: false
-categories: ["bash", "tc", "trickle", "linux", "traffic shaping", "bandwidth"]
+tags: ["bash", "tc", "trickle", "linux", "traffic shaping", "bandwidth"]
 ---
 
 It's always been a problem for me to shape traffic in Linux. After Windows
