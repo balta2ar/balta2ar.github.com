@@ -1,0 +1,35 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>MSI laptop overheating and fan noise | Mostly Technical</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css></head><body><nav><ul class=menu><li><a href=/>Home</a></li><li><a href=/about/>About</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li><li><a href=/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>MSI laptop overheating and fan noise</span></h1><h2 class=date>2023/01/08</h2><p class=terms>Tags: <a href=/tags/msi>msi</a> <a href=/tags/overheating>overheating</a> <a href=/tags/hardware>hardware</a> <a href=/tags/tlp>tlp</a> <a href=/tags/linux>linux</a> <a href=/tags/auto-cpufreq>auto-cpufreq</a></p></div><main><p>I have MSI GS65 laptop which is running Manjaro Linux.
+Setting up nvidia drivers har been historically a huge pain, and after
+one of the updates few months ago, one of the side effects was that
+any moderate CPU load would cause the fans to go full blast. Besides
+of reaching nearly 100 degrees Celsius, the noise was unbearable.</p><p>I tried attacking the problem several times, but to no avail. Recently,
+I tried one more time, and this time I managed to reduce the fan noise and
+the max temperature to consistent 70 degrees Celsius.</p><p>I&rsquo;m not entirely sure what exact step fixed the problem, so I&rsquo;ll just
+list all the things I&rsquo;ve tried.</p><h3 id=1-windows-msi-dragon-center>1. Windows, MSI Dragon Center</h3><p>It was <a href="https://www.youtube.com/watch?v=AJMiFLU_kjA">suggested</a> <a href=https://old.reddit.com/r/MSILaptops/comments/gsol69/fixing_overheating_issue_msi_gs66/>multiple</a> <a href=https://old.reddit.com/r/thinkpad/comments/k56fxe/reduce_maximum_processor_state_to_99_on_intel/>times</a> to fix something called &ldquo;Maximum processor state&rdquo;
+in Windows settings.</p><p><img src=windows-control-panel-maximum-processor-state.jpg alt="Maximum processor state"></p><p>Specifically, to limit it to something below 100%, e.g. 90%. I switched to windows and did that &ndash; miminum processor stat was set to <strong>5%</strong>, maximum to <strong>90%</strong>.</p><p>On top of that, in MSI Dragon Center, I changed the the <strong>CPU profile</strong> to Sport (or Turbo), I don&rsquo;t remember, and <strong>battery</strong> to &ldquo;Save&rdquo;, which keeps the charge level at 50..60%.</p><h3 id=2-linux-auto-cpufreq>2. Linux, auto-cpufreq</h3><p>Install <a href=https://github.com/AdnanHodzic/auto-cpufreq>auto-cpufreq</a>. Here&rsquo;s my <code>/etc/auto-cpufreq.conf</code>:</p><pre tabindex=0><code>[charger]
+governor = powersave
+scaling_min_freq = 800000
+scaling_max_freq = 3000000
+turbo = never
+[battery]
+governor = powersave
+scaling_min_freq = 800000
+scaling_max_freq = 2000000
+turbo = never
+</code></pre><p>I realize that limiting the top frequency limits the performance, but at least
+I don&rsquo;t hear a plane taking off every other minute.</p><h3 id=3-linux-tlp>3. Linux, tlp</h3><p>Uninstall <code>tlp</code>. I think this made the biggest difference.
+For some miraculous reason, I had both <code>tlp</code> and <code>auto-cpufreq</code> installed.
+I guess these are leftovers from my previous attempts to fix the problem.</p><h3 id=4-linux-thermald>4. Linux, thermald</h3><p>Install <code>thermald</code>. I don&rsquo;t know if it had any effect, but they recommend installing
+it alongside with <code>auto-cpufreq</code>, so I did it.</p><h3 id=auto-cpufreq-output><code>auto-cpufreq</code> output</h3><p>After all these adjustments, here&rsquo;s my output of <code>auto-cpufreq --status</code>:</p><pre tabindex=0><code>Battery is: charging
+
+Setting to use: &#34;powersave&#34; governor
+
+Total CPU usage: 19.9 %
+Total system load: 3.81
+Average temp. of all cores: 67.00 °C
+
+Configuration file disables turbo boost
+setting turbo boost: off
+</code></pre></main><footer><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
+<script>hljs.configure({languages:[]}),hljs.highlightAll()</script><hr>© <a href=https://balta2ar.github.io>Yuri Bochkarev</a> 2009 &ndash; 2023 | <a href=https://github.com/balta2ar>Github</a>
+| <a href=https://github.com/balta2ar/balta2ar.github.com/edit/main/content/posts/2023-01-08-msi-laptop-overheating-and-fan-noise/index.md>Edit this page</a></footer></body></html>
