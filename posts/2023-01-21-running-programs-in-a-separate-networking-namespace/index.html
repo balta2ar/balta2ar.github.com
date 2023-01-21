@@ -1,0 +1,38 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Running programs in a separate networking namespace as a systemd service | Mostly Technical</title><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/fonts.css><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css></head><body><nav><ul class=menu><li><a href=/>Home</a></li><li><a href=/about/>About</a></li><li><a href=/categories/>Categories</a></li><li><a href=/tags/>Tags</a></li><li><a href=/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>Running programs in a separate networking namespace as a systemd service</span></h1><h2 class=date>2023/01/21</h2><p class=terms>Tags: <a href=/tags/linux>linux</a> <a href=/tags/openvpn>openvpn</a> <a href=/tags/namespace>namespace</a> <a href=/tags/systemd>systemd</a></p></div><main><p>In my case I needed to run <a href=https://www.resilio.com/>resilio sync</a> in a separate networking namespace, which
+had internet access over a VPN connection. This <a href=https://github.com/slingamn/namespaced-openvpn>wonderful script</a> helps to create a networking interface for an OpenVPN connection.
+To automate openvpn startup, I made the following systemd service file:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[Unit]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Description</span><span style=color:#f92672>=</span><span style=color:#e6db74>Namespaces OpenVPN</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>After</span><span style=color:#f92672>=</span><span style=color:#e6db74>local-fs.target network.target</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[Service]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Type</span><span style=color:#f92672>=</span><span style=color:#e6db74>simple</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>WorkingDirectory</span><span style=color:#f92672>=</span><span style=color:#e6db74>/path/to/nordvpn/config/files</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ExecStart</span><span style=color:#f92672>=</span><span style=color:#e6db74>/path/to/namespaced-openvpn --config /path/to/nordvpn/config/files/us.ovpn</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Restart</span><span style=color:#f92672>=</span><span style=color:#e6db74>always</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[Install]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>WantedBy</span><span style=color:#f92672>=</span><span style=color:#e6db74>default.target</span>
+</span></span></code></pre></div><p>and enabled it</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo cp namespaced-openvpn.service /etc/systemd/system/
+</span></span><span style=display:flex><span>sudo systemctl start namespaced-openvpn.service
+</span></span><span style=display:flex><span>sudo systemctl enable namespaced-openvpn.service
+</span></span></code></pre></div><p>And similarly for resilio</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[Unit]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Description</span><span style=color:#f92672>=</span><span style=color:#e6db74>Resilio Sync running in Namespace Mode (through vpn)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>After</span><span style=color:#f92672>=</span><span style=color:#e6db74>local-fs.target network.target</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>BindsTo</span><span style=color:#f92672>=</span><span style=color:#e6db74>namespaced-openvpn.service</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>After</span><span style=color:#f92672>=</span><span style=color:#e6db74>namespaced-openvpn.service</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[Service]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Type</span><span style=color:#f92672>=</span><span style=color:#e6db74>simple</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>NetworkNamespacePath</span><span style=color:#f92672>=</span><span style=color:#e6db74>/var/run/netns/protected</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ExecStart</span><span style=color:#f92672>=</span><span style=color:#e6db74>/usr/bin/rslsync --config %h/.config/resilio-sync/config.json --log /dev/stdout --nodaemon</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Restart</span><span style=color:#f92672>=</span><span style=color:#e6db74>always</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[Install]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>WantedBy</span><span style=color:#f92672>=</span><span style=color:#e6db74>default.target</span>
+</span></span></code></pre></div><p>and</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo cp resilio-sync.service /etc/systemd/system/
+</span></span><span style=display:flex><span>systemctl --user start resilio-sync.service
+</span></span><span style=display:flex><span>systemctl --user enable resilio-sync.service
+</span></span></code></pre></div><p>By default, namespaced-openvpn uses name <code>protected</code> for the networking
+namespace. You can see that value in <code>NetworkNamespacePath</code> setting.</p></main><footer><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js></script>
+<script>hljs.configure({languages:[]}),hljs.highlightAll()</script><hr>© <a href=https://balta2ar.github.io>Yuri Bochkarev</a> 2009 &ndash; 2023 | <a href=https://github.com/balta2ar>Github</a>
+| <a href=https://github.com/balta2ar/balta2ar.github.com/edit/main/content/posts/2023-01-21-running-programs-in-a-separate-networking-namespace.md>Edit this page</a></footer></body></html>
