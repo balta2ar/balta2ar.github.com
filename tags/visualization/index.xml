@@ -1,6 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>visualization on Mostly Technical</title><link>https://balta2ar.github.io/tags/visualization/</link><description>Recent content in visualization on Mostly Technical</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 30 Dec 2022 12:03:18 +0100</lastBuildDate><atom:link href="https://balta2ar.github.io/tags/visualization/index.xml" rel="self" type="application/rss+xml"/><item><title>Using p5.js in Hugo blog posts</title><link>https://balta2ar.github.io/posts/2022-12-30-p5js/</link><pubDate>Fri, 30 Dec 2022 12:03:18 +0100</pubDate><guid>https://balta2ar.github.io/posts/2022-12-30-p5js/</guid><description>This is a post where I&amp;rsquo;m experimenting with integrating p5.js into my blog posts.
-Sample javascript code:
-function drawCursor() { drawingContext.setLineDash([2, 20]) background(255) stroke(color(0, 100, 0)) line(mouseX, 0, mouseX, height) } Sample python code:
-from dataclasses import dataclass, field from typing import Optional, List, Tuple, Callable from math import floor @dataclass class Endpoint: v: float ix: int Sample visualization using p5.js:
-Your browser does not support iframes.
-More content goes here.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Visualization on Mostly Technical</title><link>https://balta2ar.github.io/tags/visualization/</link><description>Recent content in Visualization on Mostly Technical</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 30 Dec 2022 12:03:18 +0100</lastBuildDate><atom:link href="https://balta2ar.github.io/tags/visualization/index.xml" rel="self" type="application/rss+xml"/><item><title>Using p5.js in Hugo blog posts</title><link>https://balta2ar.github.io/posts/2022-12-30-p5js/</link><pubDate>Fri, 30 Dec 2022 12:03:18 +0100</pubDate><guid>https://balta2ar.github.io/posts/2022-12-30-p5js/</guid><description>&lt;p>This is a post where I&amp;rsquo;m experimenting with integrating p5.js into my blog posts.&lt;/p>
+&lt;p>Sample javascript code:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">drawCursor&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">drawingContext&lt;/span>.&lt;span style="color:#a6e22e">setLineDash&lt;/span>([&lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">20&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">background&lt;/span>(&lt;span style="color:#ae81ff">255&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">stroke&lt;/span>(&lt;span style="color:#a6e22e">color&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">100&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">line&lt;/span>(&lt;span style="color:#a6e22e">mouseX&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#a6e22e">mouseX&lt;/span>, &lt;span style="color:#a6e22e">height&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Sample python code:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> dataclasses &lt;span style="color:#f92672">import&lt;/span> dataclass, field
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> typing &lt;span style="color:#f92672">import&lt;/span> Optional, List, Tuple, Callable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> math &lt;span style="color:#f92672">import&lt;/span> floor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@dataclass&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">Endpoint&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v: float
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ix: int
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Sample visualization using p5.js:&lt;/p>
+&lt;iframe srcdoc='
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js">&lt;/script>
+&lt;script src="https://balta2ar.github.io/js/p5js-global.js">&lt;/script>
+
+&lt;div class="p5js" id="p5js-container" style="width: 100%; height: 400px;">&lt;/div>
+&lt;script src="v1-particles.js">&lt;/script>
+' id="iframe-v1-particles" style="width: 100%; height: 400px; overflow: hidden;" scrolling="no" frameborder="0">
+ &lt;p>Your browser does not support iframes.&lt;/p>
+&lt;/iframe>
+&lt;p>More content goes here.&lt;/p></description></item></channel></rss>
